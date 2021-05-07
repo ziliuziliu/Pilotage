@@ -25,6 +25,5 @@ jobs:
         distribution: 'adopt'
         server-id: github
         
-    - run: cd broker
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B package --file ./broker/pom.xml
