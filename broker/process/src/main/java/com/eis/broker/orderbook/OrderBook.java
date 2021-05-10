@@ -61,15 +61,45 @@ public class OrderBook implements Serializable {
         return new OrderStatusMsg(order.getOrderId(), "WAITING", "Waiting to be executed.");
     }
 
+    public Integer searchAndDelete(String orderId, Map<Integer, LinkedList<Order>> map) {
+        Integer remainQuantity = 0;
+        for (Map.Entry<Integer, LinkedList<Order>> entry : map.entrySet()) {
+            Order existOrder = null;
+            LinkedList<Order> orders = entry.getValue();
+            for (Order order : orders) {
+                if (order.getOrderId().equals(orderId)) {
+                    existOrder = order;
+                    break;
+                }
+            }
+            if (existOrder != null) {
+                orders.remove(existOrder);
+                remainQuantity = existOrder.getQuantity();
+                break;
+            }
+        }
+        return remainQuantity;
+    }
+
+    public Msg cancel(Order order) {
+        String orderId = order.getOrderId();
+        Integer remainQuantity;
+        remainQuantity = searchAndDelete(orderId, buyLimitOrder);
+        if (remainQuantity != 0) return new OrderStatusMsg(orderId, "CANCELED", "Remain quantity: " + remainQuantity);
+        remainQuantity = searchAndDelete(orderId, sellLimitOrder);
+        if (remainQuantity != 0) return new OrderStatusMsg(orderId, "CANCELED", "Remain quantity: " + remainQuantity);
+        remainQuantity = searchAndDelete(orderId, buyStopOrder);
+        if (remainQuantity != 0) return new OrderStatusMsg(orderId, "CANCELED", "Remain quantity: " + remainQuantity);
+        remainQuantity = searchAndDelete(orderId, sellStopOrder);
+        if (remainQuantity != 0) return new OrderStatusMsg(orderId, "CANCELED", "Remain quantity: " + remainQuantity);
+        return new OrderStatusMsg(orderId, "ERROR", "No remain quantity.");
+    }
+
     public List<Msg> marketBuy(Order order) {
         return null;
     }
 
     public List<Msg> marketSell(Order order) {
-        return null;
-    }
-
-    public Msg cancel(Order order) {
         return null;
     }
 

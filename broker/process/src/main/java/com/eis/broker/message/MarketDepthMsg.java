@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 @Data
 public class MarketDepthMsg extends Msg {
 
-    private String productName;
+    private String product;
     private String broker;
     private Integer currentPrice;
     private Integer[] buyPrice;
