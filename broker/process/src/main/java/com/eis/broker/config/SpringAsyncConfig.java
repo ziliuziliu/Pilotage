@@ -11,24 +11,11 @@ import java.util.concurrent.Executor;
 @EnableAsync
 public class SpringAsyncConfig {
 
-    @Bean("productThreadExecutor")
-    public Executor productThreadServiceExecutor() {
+    @Bean("dbThreadExecutor")
+    public Executor dbThreadExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(5);
         executor.setMaxPoolSize(5);
-        executor.setQueueCapacity(Integer.MAX_VALUE);
-        executor.setKeepAliveSeconds(60);
-        executor.setThreadNamePrefix("product-thread");
-        executor.setWaitForTasksToCompleteOnShutdown(true);
-        executor.initialize();
-        return executor;
-    }
-
-    @Bean("dbThreadExecutor")
-    public Executor dbThreadServiceExecutor() {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(3);
-        executor.setMaxPoolSize(3);
         executor.setQueueCapacity(Integer.MAX_VALUE);
         executor.setKeepAliveSeconds(60);
         executor.setThreadNamePrefix("db-thread");
@@ -36,6 +23,4 @@ public class SpringAsyncConfig {
         executor.initialize();
         return executor;
     }
-
 }
-

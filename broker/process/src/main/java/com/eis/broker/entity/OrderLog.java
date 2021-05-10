@@ -16,7 +16,7 @@ public class OrderLog {
 
     @Id
     private String orderId;
-    private String productId;
+    private String product;
     private Integer quantity;
     private Integer price;
     private String status;
