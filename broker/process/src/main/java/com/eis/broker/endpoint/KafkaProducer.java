@@ -1,9 +1,6 @@
 package com.eis.broker.endpoint;
 
-import com.eis.broker.message.MarketDepthMsg;
-import com.eis.broker.message.Msg;
-import com.eis.broker.message.OrderStatusMsg;
-import com.eis.broker.message.TransactionMsg;
+import com.eis.broker.message.*;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -21,6 +18,7 @@ public class KafkaProducer {
     private static final String STATUS_TOPIC = "STATUS";
     private static final String TRANSACTION_TOPIC = "TRANSACTION";
     private static final String MARKET_DEPTH_TOPIC = "MARKET_DEPTH";
+    private static final String ORDER_TOPIC = "ORDER";
 
     public void sendMsgs(List<Msg> msgs) {
         for (Msg msg : msgs)
@@ -35,5 +33,7 @@ public class KafkaProducer {
             kafkaTemplate.send(STATUS_TOPIC, json);
         else if (msg instanceof MarketDepthMsg)
             kafkaTemplate.send(MARKET_DEPTH_TOPIC, json);
+        else if (msg instanceof OrderMsg)
+            kafkaTemplate.send(ORDER_TOPIC, json);
     }
 }
