@@ -1,6 +1,6 @@
 ### API
 
-返回格式：{msg:String,code:Integer,data:json}
+返回格式：{msg:String,status:Integer,data:json}
 
 如{msg:success,code:200,data:{test:1}}
 
