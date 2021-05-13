@@ -6,6 +6,7 @@
 - message: String
 #### 1.2 Transaction (broker -> trader) (topic: "TRANSACTION")
 - tradeId: String
+- orderId: String
 - broker: String
 - product: String
 - price: Integer
@@ -14,7 +15,7 @@
 - sellCompany: Strinig
 - buyName: String
 - buyCompany: String
-- initSide: String (BUY, SELL)
+- initSide: ENUM(BUY,SELL)
 #### 1.3 MarketDepth (broker -> trader) (topic: "MARKET_DEPTH")
 - product: String
 - broker: String
@@ -28,8 +29,8 @@
 - product: String
 - quantity: Integer
 - price: Integer
-- side: String (BUY, SELL)
-- type: String (MARKET, LIMIT, STOP, CANCEL)
+- side: ENUM(BUY,SELL)
+- type: ENUM (MARKET, LIMIT, STOP, CANCEL)
 - company: String
 - trader: String
 - 根据四种订单，可只传一部分字段
