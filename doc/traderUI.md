@@ -2,7 +2,7 @@
 
 返回格式：{msg:String,status:Integer,data:json}
 
-如{msg:success,code:200,data:{test:1}}
+如{msg:success,status:200,data:{test:1}}
 
 1. /trader/order
 
