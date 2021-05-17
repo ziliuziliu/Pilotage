@@ -17,6 +17,15 @@ public class Order implements Serializable {
     private String type;
 
     public Order() {}
+    public Order(String orderId, Integer price, Integer quantity, String trader, String company, String side, String type) {
+        this.orderId = orderId;
+        this.price = price;
+        this.quantity = quantity;
+        this.trader = trader;
+        this.company = company;
+        this.side = side;
+        this.type = type;
+    }
     public Order(OrderLog orderLog) {
         this.orderId = orderLog.getOrderId();
         this.price = orderLog.getPrice();
