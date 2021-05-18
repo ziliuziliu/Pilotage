@@ -1,10 +1,10 @@
 package com.eis.broker.serviceimpl;
 
 import com.eis.broker.config.Constant;
+import com.eis.broker.dao.TransactionDao;
 import com.eis.broker.endpoint.KafkaProducer;
-import com.eis.broker.entity.OrderLog;
-import com.eis.broker.message.MarketDepthMsg;
-import com.eis.broker.message.Msg;
+import com.eis.broker.entity.TransactionData;
+import com.eis.broker.message.*;
 import com.eis.broker.orderbook.Order;
 import com.eis.broker.orderbook.OrderBook;
 import com.eis.broker.orderbook.OrderBookTimer;
@@ -30,6 +30,9 @@ public class OrderBookServiceImpl implements OrderBookService {
 
     @Autowired
     private KafkaProducer kafkaProducer;
+
+    @Autowired
+    private TransactionDao transactionDao;
 
     @Override
     public OrderBook initOrderBook(String product) {
@@ -95,7 +98,18 @@ public class OrderBookServiceImpl implements OrderBookService {
                 plusMillis(Constant.market_depth_refresh_interval).isBefore(current))
             msgs.add(new MarketDepthMsg(orderBook));
         OrderBookTimer.timer.put(product, current);
-        kafkaProducer.sendMsgs(msgs);
+        msgs.forEach(m -> {
+            if (m instanceof TransactionMsg) {
+                transactionDao.save(new TransactionData((TransactionMsg) m));
+                kafkaProducer.sendMsg((TransactionMsg) m);
+            }
+            else if (m instanceof OrderStatusMsg)
+                kafkaProducer.sendMsg((OrderStatusMsg) m);
+            else if (m instanceof MarketDepthMsg)
+                kafkaProducer.sendMsg((MarketDepthMsg) m);
+            else if (m instanceof OrderMsg)
+                kafkaProducer.sendMsg((OrderMsg) m);
+        });
 
         logger.info("----writing " + product + " orderbook back----");
         redisTemplate.opsForValue().set("orderbook-" + product, orderBook);

@@ -5,8 +5,6 @@ master/target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-process/src/main/resources/application.properties
-master/src/main/resources/application.properties
 
 ### STS ###
 .apt_generated

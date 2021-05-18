@@ -1,5 +1,7 @@
 package com.eis.broker.endpoint;
 
+import com.eis.broker.dao.TransactionDao;
+import com.eis.broker.entity.TransactionData;
 import com.eis.broker.message.*;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,25 +17,27 @@ public class KafkaProducer {
     private KafkaTemplate<String, String> kafkaTemplate;
 
     private static Gson gson = new Gson();
-    private static final String STATUS_TOPIC = "STATUS";
-    private static final String TRANSACTION_TOPIC = "TRANSACTION";
     private static final String MARKET_DEPTH_TOPIC = "MARKET_DEPTH";
     private static final String ORDER_TOPIC = "ORDER";
 
-    public void sendMsgs(List<Msg> msgs) {
-        for (Msg msg : msgs)
-            sendMsg(msg);
+    public void sendMsg(TransactionMsg msg) {
+        String json = gson.toJson(msg, msg.getClass());
+        kafkaTemplate.send(msg.getBuyCompany(), json);
+        kafkaTemplate.send(msg.getSellCompany(), json);
     }
 
-    public void sendMsg(Msg msg) {
+    public void sendMsg(OrderStatusMsg msg) {
         String json = gson.toJson(msg, msg.getClass());
-        if (msg instanceof TransactionMsg)
-            kafkaTemplate.send(TRANSACTION_TOPIC, json);
-        else if (msg instanceof OrderStatusMsg)
-            kafkaTemplate.send(STATUS_TOPIC, json);
-        else if (msg instanceof MarketDepthMsg)
-            kafkaTemplate.send(MARKET_DEPTH_TOPIC, json);
-        else if (msg instanceof OrderMsg)
-            kafkaTemplate.send(ORDER_TOPIC, json);
+        kafkaTemplate.send(((OrderStatusMsg) msg).getTargetCompany(), json);
+    }
+
+    public void sendMsg(MarketDepthMsg msg) {
+        String json = gson.toJson(msg, msg.getClass());
+        kafkaTemplate.send(MARKET_DEPTH_TOPIC, json);
+    }
+
+    public void sendMsg(OrderMsg msg) {
+        String json = gson.toJson(msg, msg.getClass());
+        kafkaTemplate.send(ORDER_TOPIC, json);
     }
 }

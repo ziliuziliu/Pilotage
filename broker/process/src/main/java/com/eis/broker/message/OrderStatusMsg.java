@@ -7,12 +7,14 @@ import lombok.EqualsAndHashCode;
 @Data
 public class OrderStatusMsg extends Msg {
 
+    private String targetCompany;
     private String orderId;
     private String status;
     private String message;
 
     public OrderStatusMsg() {}
-    public OrderStatusMsg(String orderId, String status, String message) {
+    public OrderStatusMsg(String targetCompany, String orderId, String status, String message) {
+        this.targetCompany = targetCompany;
         this.orderId = orderId;
         this.status = status;
         this.message = message;

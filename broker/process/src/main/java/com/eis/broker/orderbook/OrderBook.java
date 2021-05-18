@@ -66,7 +66,7 @@ public class OrderBook implements Serializable {
         if (price >= currentPrice) return null;
         addOrder(order, buyLimitOrder);
         modifyVolume(price, order.getQuantity(), buyVolume);
-        return new OrderStatusMsg(order.getOrderId(), Constant.order_waiting, Constant.order_waiting_message);
+        return new OrderStatusMsg(order.getCompany(), order.getOrderId(), Constant.order_waiting, Constant.order_waiting_message);
     }
 
     public Msg addToSellLimitOrder(Order order) {
@@ -74,21 +74,21 @@ public class OrderBook implements Serializable {
         if (price < currentPrice) return null;
         addOrder(order, sellLimitOrder);
         modifyVolume(price, order.getQuantity(), sellVolume);
-        return new OrderStatusMsg(order.getOrderId(), Constant.order_waiting, Constant.order_waiting_message);
+        return new OrderStatusMsg(order.getCompany(), order.getOrderId(), Constant.order_waiting, Constant.order_waiting_message);
     }
 
     public Msg addToBuyStopOrder(Order order) {
         Integer price = order.getPrice();
         if (price <= currentPrice) return null;
         addOrder(order, buyStopOrder);
-        return new OrderStatusMsg(order.getOrderId(), Constant.order_waiting, Constant.order_waiting_message);
+        return new OrderStatusMsg(order.getCompany(), order.getOrderId(), Constant.order_waiting, Constant.order_waiting_message);
     }
 
     public Msg addToSellStopOrder(Order order) {
         Integer price = order.getPrice();
         if (price >= currentPrice) return null;
         addOrder(order, sellStopOrder);
-        return new OrderStatusMsg(order.getOrderId(), Constant.order_waiting, Constant.order_waiting_message);
+        return new OrderStatusMsg(order.getCompany(), order.getOrderId(), Constant.order_waiting, Constant.order_waiting_message);
     }
 
     public Integer searchAndDelete(String orderId, Map<Integer, LinkedList<Order>> map, Map<Integer, Integer> volumeMap) {
@@ -116,14 +116,14 @@ public class OrderBook implements Serializable {
         String orderId = order.getOrderId();
         Integer remainQuantity;
         remainQuantity = searchAndDelete(orderId, buyLimitOrder, buyVolume);
-        if (remainQuantity != 0) return new OrderStatusMsg(orderId, "CANCELED", "Remain quantity: " + remainQuantity);
+        if (remainQuantity != 0) return new OrderStatusMsg(order.getCompany(), orderId, "CANCELED", "Remain quantity: " + remainQuantity);
         remainQuantity = searchAndDelete(orderId, sellLimitOrder, sellVolume);
-        if (remainQuantity != 0) return new OrderStatusMsg(orderId, "CANCELED", "Remain quantity: " + remainQuantity);
+        if (remainQuantity != 0) return new OrderStatusMsg(order.getCompany(), orderId, "CANCELED", "Remain quantity: " + remainQuantity);
         remainQuantity = searchAndDelete(orderId, buyStopOrder, null);
-        if (remainQuantity != 0) return new OrderStatusMsg(orderId, "CANCELED", "Remain quantity: " + remainQuantity);
+        if (remainQuantity != 0) return new OrderStatusMsg(order.getCompany(), orderId, "CANCELED", "Remain quantity: " + remainQuantity);
         remainQuantity = searchAndDelete(orderId, sellStopOrder, null);
-        if (remainQuantity != 0) return new OrderStatusMsg(orderId, "CANCELED", "Remain quantity: " + remainQuantity);
-        return new OrderStatusMsg(orderId, "ERROR", "No remain quantity.");
+        if (remainQuantity != 0) return new OrderStatusMsg(order.getCompany(), orderId, "CANCELED", "Remain quantity: " + remainQuantity);
+        return new OrderStatusMsg(order.getCompany(), orderId, "ERROR", "No remain quantity.");
     }
 
     private void refreshCurrentPrice() {
@@ -145,7 +145,7 @@ public class OrderBook implements Serializable {
                 msgs.add(new TransactionMsg(UUID.randomUUID().toString().replaceAll("-", ""),
                         Constant.broker, product, price, dealQuantity, limitOrder.getTrader(), limitOrder.getCompany(),
                         order.getTrader(), order.getCompany(), "BUY"));
-                msgs.add(new OrderStatusMsg(limitOrder.getOrderId(), Constant.order_executed, Constant.order_executed_message));
+                msgs.add(new OrderStatusMsg(order.getCompany(), limitOrder.getOrderId(), Constant.order_executed, Constant.order_executed_message));
                 remainQuantity -= dealQuantity;
                 modifyVolume(price, -dealQuantity, sellVolume);
                 limitOrder.setQuantity(limitOrder.getQuantity() - dealQuantity);
@@ -164,7 +164,7 @@ public class OrderBook implements Serializable {
             sellVolume.remove(redundantLevel);
             buyStopOrder.remove(redundantLevel + Constant.interval);
         }
-        msgs.add(new OrderStatusMsg(order.getOrderId(), Constant.order_executed, Constant.order_executed_message));
+        msgs.add(new OrderStatusMsg(order.getCompany(), order.getOrderId(), Constant.order_executed, Constant.order_executed_message));
         refreshCurrentPrice();
         return msgs;
     }
@@ -181,7 +181,7 @@ public class OrderBook implements Serializable {
                 msgs.add(new TransactionMsg(UUID.randomUUID().toString().replaceAll("-", ""),
                         Constant.broker, product, price, dealQuantity, order.getTrader(), order.getCompany(),
                         limitOrder.getTrader(), limitOrder.getCompany(),"SELL"));
-                msgs.add(new OrderStatusMsg(limitOrder.getOrderId(), Constant.order_executed, Constant.order_executed_message));
+                msgs.add(new OrderStatusMsg(order.getCompany(), limitOrder.getOrderId(), Constant.order_executed, Constant.order_executed_message));
                 remainQuantity -= dealQuantity;
                 modifyVolume(price, -dealQuantity, buyVolume);
                 limitOrder.setQuantity(limitOrder.getQuantity() - dealQuantity);
@@ -200,7 +200,7 @@ public class OrderBook implements Serializable {
             buyVolume.remove(redundantLevel);
             sellStopOrder.remove(redundantLevel - Constant.interval);
         }
-        msgs.add(new OrderStatusMsg(order.getOrderId(), Constant.order_executed, Constant.order_executed_message));
+        msgs.add(new OrderStatusMsg(order.getCompany(), order.getOrderId(), Constant.order_executed, Constant.order_executed_message));
         refreshCurrentPrice();
         return msgs;
     }
