@@ -66,4 +66,12 @@ public class Msg<T> {
     }
 
 
+    @Override
+    public String toString() {
+        return "Msg{" +
+                "status=" + status +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                '}';
+    }
 }

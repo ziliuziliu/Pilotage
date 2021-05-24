@@ -13,6 +13,7 @@
         <module>transmit</module>
         <module>market</module>
         <module>transaction</module>
+        <module>gateway</module>
     </modules>
 
     <properties>
