@@ -11,6 +11,8 @@
     <modules>
         <module>common</module>
         <module>transmit</module>
+        <module>market</module>
+        <module>transaction</module>
     </modules>
 
     <properties>
