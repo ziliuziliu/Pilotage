@@ -1,13 +1,11 @@
 package com.eis.broker.serviceimpl;
 
-import com.eis.broker.config.Constant;
 import com.eis.broker.dao.TransactionDao;
 import com.eis.broker.endpoint.KafkaProducer;
 import com.eis.broker.entity.TransactionData;
 import com.eis.broker.message.*;
 import com.eis.broker.orderbook.Order;
 import com.eis.broker.orderbook.OrderBook;
-import com.eis.broker.orderbook.OrderBookTimer;
 import com.eis.broker.service.OrderBookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +14,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,11 +90,6 @@ public class OrderBookServiceImpl implements OrderBookService {
         }
 
         logger.info("----broadcasting----");
-        Instant current = Instant.now();
-        if (!OrderBookTimer.timer.containsKey(product) || OrderBookTimer.timer.get(product).
-                plusMillis(Constant.market_depth_refresh_interval).isBefore(current))
-            msgs.add(new MarketDepthMsg(orderBook));
-        OrderBookTimer.timer.put(product, current);
         msgs.forEach(m -> {
             if (m instanceof TransactionMsg) {
                 transactionDao.save(new TransactionData((TransactionMsg) m));
@@ -105,8 +97,6 @@ public class OrderBookServiceImpl implements OrderBookService {
             }
             else if (m instanceof OrderStatusMsg)
                 kafkaProducer.sendMsg((OrderStatusMsg) m);
-            else if (m instanceof MarketDepthMsg)
-                kafkaProducer.sendMsg((MarketDepthMsg) m);
             else if (m instanceof OrderMsg)
                 kafkaProducer.sendMsg((OrderMsg) m);
         });

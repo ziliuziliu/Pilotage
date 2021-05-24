@@ -7,6 +7,7 @@ public class Constant {
 
     public static String order_executed = "EXECUTED";
     public static String order_executed_message = "Order is executed.";
+    public static String order_partial_executed_message = "Order is partially executed.";
     public static String order_waiting = "WAITING";
-    public static String order_waiting_message = "Waiting to be executed.";
+    public static String order_waiting_message = "Waiting to execute.";
 }
