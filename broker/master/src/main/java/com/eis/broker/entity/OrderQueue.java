@@ -1,7 +1,9 @@
 package com.eis.broker.entity;
 
+import com.eis.broker.endpoint.DispatchGrpcClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -19,21 +21,29 @@ public class OrderQueue {
 
     private static final Logger logger = LoggerFactory.getLogger(OrderQueue.class);
 
-    public OrderQueue() {}
+    private final DispatchGrpcClient dispatchGrpcClient;
+
+    @Autowired
+    public OrderQueue(DispatchGrpcClient dispatchGrpcClient) {
+        this.dispatchGrpcClient = dispatchGrpcClient;
+    }
 
     class DispatchThread extends Thread {
+
         @Override
         @SuppressWarnings("InfiniteLoopStatement")
         public void run() {
             while (true) {
-                sendOrderRR();
                 try {
+                    sendOrderRR();
                     Thread.sleep(10);
-                } catch (InterruptedException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
+
+
     }
 
     @PostConstruct
@@ -74,7 +84,8 @@ public class OrderQueue {
             status.put(product, false);
             OrderLog orderLog = queue.pop();
             logger.info("----Dispatching order " + orderLog.getOrderId() + "----");
-            //send order
+            boolean response = dispatchGrpcClient.dispatch(orderLog);
+            logger.info(String.valueOf(response));
             lock.unlock();
         }
     }

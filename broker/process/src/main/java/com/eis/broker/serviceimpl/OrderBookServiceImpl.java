@@ -1,6 +1,7 @@
 package com.eis.broker.serviceimpl;
 
 import com.eis.broker.dao.TransactionDao;
+import com.eis.broker.endpoint.DispatchGrpcClient;
 import com.eis.broker.endpoint.KafkaProducer;
 import com.eis.broker.entity.TransactionData;
 import com.eis.broker.message.*;
@@ -30,6 +31,9 @@ public class OrderBookServiceImpl implements OrderBookService {
 
     @Autowired
     private TransactionDao transactionDao;
+
+    @Autowired
+    private DispatchGrpcClient dispatchGrpcClient;
 
     @Override
     public OrderBook initOrderBook(String product) {
@@ -103,6 +107,9 @@ public class OrderBookServiceImpl implements OrderBookService {
 
         logger.info("----writing " + product + " orderbook back----");
         redisTemplate.opsForValue().set("orderbook-" + product, orderBook);
-        //notify master
+
+        logger.info("----notifying master----");
+        boolean response = dispatchGrpcClient.finished(product);
+        logger.info(String.valueOf(response));
     }
 }
