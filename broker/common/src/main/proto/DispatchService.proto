@@ -1,0 +1,31 @@
+syntax="proto3";
+option java_multiple_files = true;
+package com.eis.broker.endpoint;
+
+message DispatchRequest {
+    string orderId = 1;
+    string product = 2;
+    int32 quantity = 3;
+    int32 price = 4;
+    string side = 5;
+    string type = 6;
+    string company = 7;
+    string trader = 8;
+}
+
+message DispatchResponse {
+    bool status = 1;
+}
+
+message FinishedRequest {
+    string product = 1;
+}
+
+message FinishedResponse {
+    bool status = 1;
+}
+
+service Dispatch {
+    rpc dispatch(DispatchRequest) returns (DispatchResponse);
+    rpc finished(FinishedRequest) returns (FinishedResponse);
+}
