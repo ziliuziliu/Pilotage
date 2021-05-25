@@ -30,3 +30,32 @@ jobs:
       
     - name: Build trader with Maven
       run: mvn -B package --file ./trader/pom.xml
+      
+    - name: Docker Login
+      uses: docker/login-action@v1.9.0
+      with:
+        registry: registry.cn-hangzhou.aliyuncs.com
+        username: 听说名字多长就有多拉风
+        password: xxYYC1021393052
+      
+    - name: docker build trader-transmit
+      run: |
+        cd ./trader/transmit
+        docker build -t trader-transmit .
+        docker push registry.cn-hangzhou.aliyuncs.com/pilotage/trader-transmit
+        
+    - name: docker build broker-master
+      run: |
+        cd ./broker/master
+        docker build -t broker-master .
+        docker push registry.cn-hangzhou.aliyuncs.com/pilotage/broker-master
+        
+    - name: docker build broker-process
+      run: |
+        cd ./broker/process
+        docker build -t broker-process .
+        docker push registry.cn-hangzhou.aliyuncs.com/pilotage/broker-process
+        
+        
+    
+        
