@@ -5,10 +5,10 @@ import lombok.Data;
 
 @Data
 public class OrderStatusInfo {
-    Integer orderId;
+    String orderId;
     OrderStatus status;
 
-    public OrderStatusInfo(Integer orderId, OrderStatus status) {
+    public OrderStatusInfo(String orderId, OrderStatus status) {
         this.orderId = orderId;
         this.status = status;
     }
