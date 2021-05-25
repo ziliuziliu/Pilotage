@@ -37,4 +37,4 @@
   - MARKET: all except price
   - LIMIT: all
   - STOP: all
-  - CANCEL: orderId, company
+  - CANCEL: orderId, product

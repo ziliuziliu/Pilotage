@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "orderId")
 public class Order {
     @Id
-    private Integer orderId;
+    private String orderId;
     private String product;
     private Integer quantity;
     private Integer price;
@@ -29,7 +29,7 @@ public class Order {
     private String company;
     private String trader;
 
-    public Order(Integer orderId, String product, Integer quantity, Integer price,
+    public Order(String orderId, String product, Integer quantity, Integer price,
                  UserSide side, OrderType type, String trader) {
         this.orderId = orderId;
         this.product = product;

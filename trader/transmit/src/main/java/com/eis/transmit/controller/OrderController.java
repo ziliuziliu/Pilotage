@@ -14,20 +14,25 @@ public class OrderController {
 
     @RequestMapping(value = "/order",method = RequestMethod.PUT)
     public Msg<OrderStatusInfo> addOrder(@RequestBody JsonObject jsonObject){
-        if(!jsonObject.has("product")||!jsonObject.has("quantity")||!jsonObject.has("side")||
+        if(!jsonObject.has("product")||!jsonObject.has("side")||
         !jsonObject.has("type")||!jsonObject.has("trader")){
             throw new RuntimeException(MsgUtil.PARAM_DEFICIT_MSG);
         }
         String product=jsonObject.get("product").getAsString();
-        Integer quantity=jsonObject.get("quantity").getAsInt();
         UserSide side=UserSide.valueOf(jsonObject.get("side").getAsString());
         String trader=jsonObject.get("trader").getAsString();
         OrderType orderType=OrderType.valueOf(jsonObject.get("type").getAsString());
         if(orderType==OrderType.LIMIT||orderType==OrderType.STOP){
-            if(!jsonObject.has("price"))throw new RuntimeException(MsgUtil.PARAM_DEFICIT_MSG);
+            if(!jsonObject.has("price")||!jsonObject.has("quantity"))throw new RuntimeException(MsgUtil.PARAM_DEFICIT_MSG);
+            Integer quantity=jsonObject.get("quantity").getAsInt();
             Integer price=jsonObject.get("price").getAsInt();
             return new Msg<>(MsgCode.SUCCESS,orderService.addOrder(product,quantity,price,side,orderType,trader));
         }
-        return new Msg<>(MsgCode.SUCCESS,orderService.addOrder(product,quantity,-1,side,orderType,trader));
+        if(orderType==OrderType.MARKET){
+            if(!jsonObject.has("quantity"))throw new RuntimeException(MsgUtil.PARAM_DEFICIT_MSG);
+            Integer quantity=jsonObject.get("quantity").getAsInt();
+            return new Msg<>(MsgCode.SUCCESS,orderService.addOrder(product,quantity,0,side,orderType,trader));
+        }
+        return new Msg<>(MsgCode.SUCCESS,orderService.addOrder(product,0,0,side,orderType,trader));
     }
 }

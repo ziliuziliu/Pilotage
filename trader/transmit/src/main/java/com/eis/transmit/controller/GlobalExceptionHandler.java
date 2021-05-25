@@ -24,4 +24,10 @@ public class GlobalExceptionHandler {
         }
         return new Msg<>(MsgCode.NULL_ARGUMENT,false);
     }
+
+    @ExceptionHandler(feign.RetryableException.class)
+    public Msg<Boolean> handle(feign.RetryableException e){
+        TransmitApplication.logger.error("feignException", e);
+        return new Msg<>(MsgCode.FEIGN_FAILURE,false);
+    }
 }
