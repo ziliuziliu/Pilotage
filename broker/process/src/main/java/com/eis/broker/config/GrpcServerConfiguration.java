@@ -21,7 +21,7 @@ public class GrpcServerConfiguration {
         this.dispatchGrpcService = dispatchGrpcService;
     }
 
-    private int port = 14999;
+    private int port = 8081;
     private Server server;
 
     public void start() throws IOException {

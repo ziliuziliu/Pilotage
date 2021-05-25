@@ -14,7 +14,7 @@ public class GrpcClientConfiguration {
     @Value("${broker.master.name}")
     private String host;
 
-    @Value("${broker.master.port}")
+    @Value("${broker.master.grpc.port}")
     private int port;
 
     private ManagedChannel channel;

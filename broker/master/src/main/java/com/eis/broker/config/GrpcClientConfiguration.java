@@ -14,7 +14,7 @@ public class GrpcClientConfiguration {
     @Value("${broker.process.name}")
     private String host;
 
-    @Value("${broker.process.port}")
+    @Value("${broker.process.grpc.port}")
     private int port;
 
     private ManagedChannel channel;
