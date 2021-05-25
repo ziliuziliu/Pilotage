@@ -41,19 +41,19 @@ jobs:
     - name: docker build trader-transmit
       run: |
         cd ./trader/transmit
-        docker build -t trader-transmit .
+        docker build -t registry.cn-hangzhou.aliyuncs.com/pilotage/trader-transmit .
         docker push registry.cn-hangzhou.aliyuncs.com/pilotage/trader-transmit
         
     - name: docker build broker-master
       run: |
         cd ./broker/master
-        docker build -t broker-master .
+        docker build -t registry.cn-hangzhou.aliyuncs.com/pilotage/broker-master .
         docker push registry.cn-hangzhou.aliyuncs.com/pilotage/broker-master
         
     - name: docker build broker-process
       run: |
         cd ./broker/process
-        docker build -t broker-process .
+        docker build -t registry.cn-hangzhou.aliyuncs.com/pilotage/broker-process .
         docker push registry.cn-hangzhou.aliyuncs.com/pilotage/broker-process
         
         
