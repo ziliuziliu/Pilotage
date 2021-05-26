@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public Msg<Boolean> handle(RuntimeException e){
         TransmitApplication.logger.error("RuntimeException", e);
-        if(e.getMessage()== MsgUtil.PARAM_DEFICIT_MSG){
+        if(e.getMessage().equals(MsgUtil.PARAM_DEFICIT_MSG)){
             return new Msg<>(MsgCode.PARAM_DEFICIT,false);
         }
         return new Msg<>(MsgCode.NULL_ARGUMENT,false);

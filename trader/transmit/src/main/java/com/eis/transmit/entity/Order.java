@@ -35,7 +35,7 @@ public class Order {
     public Order(){}
 
     public Order(String orderId, String product, Integer quantity, Integer price,
-                 UserSide side, OrderType type, String trader) {
+                 UserSide side, OrderType type, String trader,String company) {
         this.orderId = orderId;
         this.product = product;
         this.quantity = quantity;
@@ -43,5 +43,6 @@ public class Order {
         this.side = side;
         this.type = type;
         this.trader = trader;
+        this.company=company;
     }
 }

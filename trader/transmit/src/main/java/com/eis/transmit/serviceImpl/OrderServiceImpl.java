@@ -27,11 +27,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderStatusInfo addOrder(String product, Integer quantity, Integer price,
-                                    UserSide side, OrderType type, String trader) {
+                                    UserSide side, OrderType type, String company,String trader) {
         TransmitApplication.logger.info(TAG+"make request for orderId");
         String orderId=orderFeignService.getUUID();
         TransmitApplication.logger.info(TAG+"orderId get");
-        Order order=new Order(orderId,product,quantity,price,side,type,trader);
+        Order order=new Order(orderId,product,quantity,price,side,type,trader,company);
         kafkaTemplate.send("ORDER",getHashCode(product),product,TransmitApplication.gson.toJson(order));
         return orderDao.saveOrder(order);
     }
