@@ -55,3 +55,13 @@ jobs:
         cd ./broker/process
         docker build -t registry.cn-hangzhou.aliyuncs.com/pilotage/broker-process:v$GITHUB_RUN_NUMBER .
         docker push registry.cn-hangzhou.aliyuncs.com/pilotage/broker-process:v$GITHUB_RUN_NUMBER
+      
+    - name: Execute SSH commmands on remote server
+      uses: JimCronqvist/action-ssh@master
+      with:
+        hosts: 'root@202.120.40.8:30550'
+        privateKey: ${{ secrets.PRIVATE_KEY }}
+        command: |
+          ls
+
+
