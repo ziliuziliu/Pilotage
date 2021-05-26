@@ -8,14 +8,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.annotation.Id;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Data
+@Entity
 @Table(name="order")
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "orderId")
+@Data
 public class Order {
     @Id
     private String orderId;
@@ -25,9 +28,11 @@ public class Order {
     private OrderStatus status;
     private UserSide side;
     private OrderType type;
-    @Value("${company-name}")
     private String company;
     private String trader;
+    private Long id;
+
+    public Order(){}
 
     public Order(String orderId, String product, Integer quantity, Integer price,
                  UserSide side, OrderType type, String trader) {
