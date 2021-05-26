@@ -1,13 +1,10 @@
 package com.eis.broker.config;
 
 import com.eis.broker.endpoint.DispatchGrpcService;
-import com.eis.broker.endpoint.OrderController;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
