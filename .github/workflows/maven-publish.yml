@@ -24,14 +24,15 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         server-id: github
-      
-    - name: Execute SSH commmands on remote server
-      uses: JimCronqvist/action-ssh@master
+        
+    - name: SSH Remote Commands
+      uses: appleboy/ssh-action@v0.1.4
       with:
-        hosts: 'root@202.120.40.8:30550'
-        privateKey: ${{ secrets.PRIVATE_KEY }}
-        command: ls -lah
-        debug: true
+        host: 202.120.40.8
+        username: root
+        port: 30550
+        key: ${{ secrets.PRIVATE_KEY }}
+        script: whoami
 
 
 
