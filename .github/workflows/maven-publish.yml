@@ -25,15 +25,13 @@ jobs:
         distribution: 'adopt'
         server-id: github
       
-    - name: SSH Remote Commands
-      uses: appleboy/ssh-action@v0.1.4
+    - name: Execute SSH commmands on remote server
+      uses: JimCronqvist/action-ssh@master
       with:
-        host: 202.120.40.8
-        username: root
-        port: 30550
-        key: ${{ secrets.PRIVATE_KEY }}
+        hosts: 'root@202.120.40.8:30550'
+        privateKey: ${{ secrets.PRIVATE_KEY }}
+        command: ls -lah
         debug: true
-        script: whoami
 
 
 
