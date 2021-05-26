@@ -29,7 +29,6 @@ public class OrderQueue {
     }
 
     class DispatchThread extends Thread {
-
         @Override
         @SuppressWarnings("InfiniteLoopStatement")
         public void run() {
@@ -42,8 +41,6 @@ public class OrderQueue {
                 }
             }
         }
-
-
     }
 
     @PostConstruct

@@ -1,7 +1,6 @@
 package com.eis.broker.endpoint;
 
 import com.eis.broker.config.GrpcClientConfiguration;
-import com.eis.broker.entity.OrderLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
