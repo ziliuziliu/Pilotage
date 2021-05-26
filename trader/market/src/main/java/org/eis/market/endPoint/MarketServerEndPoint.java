@@ -13,7 +13,7 @@ import java.io.IOException;
 @ServerEndpoint(value="/market",
                 decoders = {MessageDecoder.class})
 @Component
-public class MarketDepthEndPoint {
+public class MarketServerEndPoint {
     private final String TAG="MarketDepthEndPoint ";
 
     @OnOpen
