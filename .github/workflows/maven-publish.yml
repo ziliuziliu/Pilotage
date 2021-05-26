@@ -25,14 +25,16 @@ jobs:
         distribution: 'adopt'
         server-id: github
         
-    - name: SSH Remote Commands
-      uses: appleboy/ssh-action@v0.1.4
+    - name: ls -a via ssh
+      uses: garygrossgarten/github-action-ssh@release
       with:
+        command: ls -a
         host: 202.120.40.8
-        username: root
         port: 30550
-        key: ${{ secrets.PRIVATE_KEY }}
-        script: whoami
+        username: root
+        privateKey: ${{ secrets.PRIVATE_KEY}}
+      
+
 
 
 
