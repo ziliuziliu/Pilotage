@@ -2,7 +2,6 @@ package com.eis.broker.websocket;
 
 import com.eis.broker.message.MarketDepthMsg;
 import com.eis.broker.orderbook.OrderBook;
-import com.eis.broker.serviceimpl.OrderBookServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
