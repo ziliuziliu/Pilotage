@@ -31,7 +31,7 @@ jobs:
         host: 202.120.40.8
         username: root
         port: 30550
-        key: ${{ secrets.KEY }}
+        key: ${{ secrets.PRIVATE_KEY }}
         script: |
           whoami
           ls
