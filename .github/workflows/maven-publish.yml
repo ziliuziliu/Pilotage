@@ -1,7 +1,4 @@
-# This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
-# For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
-
-name: deploy application
+name: deploy backend
 
 on:
   push:
@@ -41,21 +38,17 @@ jobs:
     - name: docker build trader-transmit
       run: |
         cd ./trader/transmit
-        docker build -t registry.cn-hangzhou.aliyuncs.com/pilotage/trader-transmit .
-        docker push registry.cn-hangzhou.aliyuncs.com/pilotage/trader-transmit
+        docker build -t registry.cn-hangzhou.aliyuncs.com/pilotage/trader-transmit:v$GITHUB_RUN_NUMBER .
+        docker push registry.cn-hangzhou.aliyuncs.com/pilotage/trader-transmit:v$GITHUB_RUN_NUMBER
         
     - name: docker build broker-master
       run: |
         cd ./broker/master
-        docker build -t registry.cn-hangzhou.aliyuncs.com/pilotage/broker-master .
-        docker push registry.cn-hangzhou.aliyuncs.com/pilotage/broker-master
+        docker build -t registry.cn-hangzhou.aliyuncs.com/pilotage/broker-master:v$GITHUB_RUN_NUMBER .
+        docker push registry.cn-hangzhou.aliyuncs.com/pilotage/broker-master:v$GITHUB_RUN_NUMBER
         
     - name: docker build broker-process
       run: |
         cd ./broker/process
-        docker build -t registry.cn-hangzhou.aliyuncs.com/pilotage/broker-process .
-        docker push registry.cn-hangzhou.aliyuncs.com/pilotage/broker-process
-        
-        
-    
-        
+        docker build -t registry.cn-hangzhou.aliyuncs.com/pilotage/broker-process:v$GITHUB_RUN_NUMBER .
+        docker push registry.cn-hangzhou.aliyuncs.com/pilotage/broker-process:v$GITHUB_RUN_NUMBER
