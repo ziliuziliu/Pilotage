@@ -12,7 +12,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @RequestMapping(value = "/order",method = RequestMethod.PUT)
+    @RequestMapping(value = "/order",method = RequestMethod.POST)
     public Msg<OrderStatusInfo> addOrder(@RequestBody JsonObject jsonObject){
         if(!jsonObject.has("product")||!jsonObject.has("side")||
         !jsonObject.has("type")||!jsonObject.has("trader")||!jsonObject.has("company")){
