@@ -28,8 +28,6 @@ jobs:
     - name: test env
       run: |
         echo $GITHUB_RUN_NUMBER
-        echo $GITHUB_ACTION	
-        echo $GITHUB_RUN_ID
     
         
         
