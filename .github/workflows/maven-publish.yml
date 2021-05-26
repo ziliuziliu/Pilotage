@@ -32,6 +32,7 @@ jobs:
         username: root
         port: 30550
         key: ${{ secrets.PRIVATE_KEY }}
+        debug: true
         script: whoami
 
 
