@@ -37,6 +37,9 @@ jobs:
         registry: registry.cn-hangzhou.aliyuncs.com
         username: 听说名字多长就有多拉风
         password: xxYYC1021393052
+    
+    - name: test env
+      run: echo $GITHUB_RUN_NUMBER
       
     - name: docker build trader-transmit
       run: |
