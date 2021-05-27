@@ -15,9 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="order")
-@JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "orderId")
+@Table(name="orders")
 @Data
 public class Order {
     @Id
@@ -30,7 +28,6 @@ public class Order {
     private OrderType type;
     private String company;
     private String trader;
-    private Long id;
 
     public Order(){}
 

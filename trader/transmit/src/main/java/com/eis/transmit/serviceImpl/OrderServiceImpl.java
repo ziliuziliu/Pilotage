@@ -1,5 +1,6 @@
 package com.eis.transmit.serviceImpl;
 
+import com.eis.common.util.OrderStatus;
 import com.eis.common.util.OrderType;
 import com.eis.common.util.UserSide;
 import com.eis.transmit.TransmitApplication;
