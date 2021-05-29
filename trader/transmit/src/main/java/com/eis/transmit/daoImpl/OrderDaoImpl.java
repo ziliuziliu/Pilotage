@@ -26,4 +26,11 @@ public class OrderDaoImpl implements OrderDao {
         TransmitApplication.logger.info(TAG+ "order save");
         return new OrderStatusInfo(order.getOrderId(),order.getStatus());
     }
+
+    @Override
+    public OrderStatusInfo updateStatusByOrderId(OrderStatusInfo orderStatusInfo) {
+        Objects.requireNonNull(orderStatusInfo,TAG+" updateStatusByOrderId: null orderStatus");
+        orderRepository.updateStatusByOrderId(orderStatusInfo.getStatus().toString(),orderStatusInfo.getOrderId());
+        return orderStatusInfo;
+    }
 }

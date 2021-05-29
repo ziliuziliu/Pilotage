@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(url="${transmit-service-url}",name="transmit")
-public interface OrderService {
-    @RequestMapping(value = "/order",method = RequestMethod.PUT)
+@FeignClient(url="${trader-transmit-service}")
+public interface OrderFeignService {
+    @RequestMapping(value = "/order",method = RequestMethod.POST)
     Msg<OrderStatusInfo> addOrder(@RequestBody JsonObject jsonObject);
 }
