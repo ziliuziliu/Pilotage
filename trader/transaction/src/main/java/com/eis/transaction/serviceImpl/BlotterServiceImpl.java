@@ -13,16 +13,6 @@ import java.util.List;
 public class BlotterServiceImpl implements BlotterService {
     private final String TAG="BlotterService";
 
-    @Autowired
-    private BlotterDao blotterDao;
-
-    @KafkaListener(topics={})
-    public void saveBlotter(ConsumerRecord<?,?> record) {
-        TransactionApplication.logger.info(TAG+"receive order blotter from kafka: "+record.value().toString());
-        Blotter blotter=TransactionApplication.gson.fromJson(record.value().toString(),Blotter.class);
-        blotterDao.saveBlotter(blotter);
-    }
-
     @Override
     public List<Blotter> getOrderBlotter(String company, String trader) {
         return null;

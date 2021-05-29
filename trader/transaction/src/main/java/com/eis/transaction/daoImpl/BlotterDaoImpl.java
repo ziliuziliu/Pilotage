@@ -4,7 +4,9 @@ import com.eis.transaction.dao.BlotterDao;
 import com.eis.transaction.entity.Blotter;
 import com.eis.transaction.repository.BlotterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class BlotterDaoImpl implements BlotterDao {
     @Autowired
     private BlotterRepository blotterRepository;

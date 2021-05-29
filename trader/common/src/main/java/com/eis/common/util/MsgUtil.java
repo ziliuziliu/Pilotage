@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 
 public class MsgUtil {
 
-    public static final int SUCCESS = 0;
+    public static final int SUCCESS = 200;
     public static final int NULL_ARGUMENT=400;
     public static final int PARAM_DEFICIT=401;
     public static final int AUTHENTICATION_FAILURE=402;
