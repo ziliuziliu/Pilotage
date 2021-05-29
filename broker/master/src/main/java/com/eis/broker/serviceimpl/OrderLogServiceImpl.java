@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class OrderLogServiceImpl implements OrderLogService {
 
@@ -20,10 +22,10 @@ public class OrderLogServiceImpl implements OrderLogService {
         this.orderLogDao = orderLogDao;
     }
 
-    @Async("dbThreadExecutor")
     @Override
     public void saveOrderLog(OrderLog orderLog) {
         logger.info("----writing log for order " + orderLog.getOrderId() + "----");
+        orderLog.setLogId(UUID.randomUUID().toString().replaceAll("-", ""));
         orderLogDao.save(orderLog);
         logger.info("----writing log for order " + orderLog.getOrderId() + "completed----");
     }

@@ -2,16 +2,10 @@ package com.eis.broker.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import java.sql.Timestamp;
 
 @Data
-@Entity
-@EntityListeners(AuditingEntityListener.class)
 public class OrderLog {
 
     @Id
@@ -19,7 +13,6 @@ public class OrderLog {
     private String product;
     private Integer quantity;
     private Integer price;
-    private String status;
     private String side;
     private String type;
     private String company;

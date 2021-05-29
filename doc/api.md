@@ -1,10 +1,10 @@
 ## API
 ### 1. Kafka Messages
-#### 1.1 OrderStatus (broker -> trader) (topic: "STATUS")
+#### 1.1 OrderStatus (broker -> trader) (topic: $companyname)
 - orderId: String
 - status: String (其中ERROR为订单出现错误，其他状态为正常更新，应当被写到trader维护的订单状态中)
 - message: String
-#### 1.2 Transaction (broker -> trader) (topic: "TRANSACTION")
+#### 1.2 Transaction (broker -> trader) (topic: $companyname)
 - tradeId: String
 - orderId: String
 - broker: String
@@ -34,3 +34,7 @@
 - company: String
 - trader: String
 - 根据四种订单，可只传一部分字段
+  - MARKET: all except price
+  - LIMIT: all
+  - STOP: all
+  - CANCEL: orderId, product
