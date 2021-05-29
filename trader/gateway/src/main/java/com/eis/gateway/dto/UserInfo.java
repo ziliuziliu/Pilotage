@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class UserInfo {
     String company;
-    String trader;
+    String username;
+    String password;
     String token;
 }
