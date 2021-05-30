@@ -7,4 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface UserRepository extends JpaRepository<User,Integer> {
     User findAllByCompanyAndUsername(String company,String username);
+
+    User findByUserId(Integer userId);
 }

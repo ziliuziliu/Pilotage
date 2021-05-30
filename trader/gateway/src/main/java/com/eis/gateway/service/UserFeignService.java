@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(url="${trader-order-service}")
+@FeignClient(url="${trader-user-service}")
 public interface UserFeignService {
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     Msg<UserInfo> login(@RequestBody JsonObject jsonObject);

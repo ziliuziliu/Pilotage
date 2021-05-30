@@ -7,10 +7,7 @@ import com.eis.user.entity.User;
 import com.eis.user.service.UserService;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -30,5 +27,10 @@ public class UserController {
             return new Msg<>(MsgCode.AUTHENTICATION_FAILURE,null);
         }
         return new Msg<>(MsgCode.SUCCESS,user);
+    }
+
+    @RequestMapping(value="/user",method = RequestMethod.GET)
+    public Msg<User> findByUserId(@RequestParam Integer userId){
+        return new Msg<>(MsgCode.SUCCESS,userService.findByUserId(userId));
     }
 }

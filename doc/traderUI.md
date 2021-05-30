@@ -17,7 +17,7 @@
    - price: Integer
    - side: String (BUY, SELL)
    - type: String (MARKET, LIMIT, STOP, CANCEL)
-   - trader: String
+   - Integer userId
    - 根据四种订单，可只传一部分字段
 
    return data:
@@ -26,11 +26,35 @@
 
    ​	status String 表示订单状态
 
-2. /trader/market
+2. /trader/order
 
    method:GET
 
    content-type:application/x-www-form-urlencoded
+
+   Query:
+
+   userId integer
+
+   return data:
+
+   ​	List[	
+
+   ​	orderId String
+
+   ​	status String
+
+   - product: String
+   - quantity: Integer
+   - price: Integer
+   - side: String (BUY, SELL)
+   - type: String (MARKET, LIMIT, STOP, CANCEL)
+
+   ​	]
+
+2. /trader/market
+
+   content-type:websocket
 
    Query:
 
@@ -54,7 +78,9 @@
 
    ​	sellAmount: Integer[]
 
-3. /trader/order
+2. 
+
+3. /trader/order/transaction
 
    method:GET
 
@@ -62,27 +88,7 @@
 
    Query:
 
-   userId
-
-   return data:
-
-   ​	List[	
-
-   ​	orderId String
-
-   ​	status String
-
-   ​	]
-
-4. /trader/order/transaction
-
-   method:GET
-
-   content-type:application/x-www-form-urlencoded
-
-   Query:
-
-   userId
+   userId integer
 
    return data:
 
@@ -112,4 +118,8 @@
 
    ​	]
 
-   ​	
+5. /trader/login
+
+   method:POST
+
+   content-type:

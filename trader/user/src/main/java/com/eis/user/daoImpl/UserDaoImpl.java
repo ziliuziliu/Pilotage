@@ -15,4 +15,9 @@ public class UserDaoImpl implements UserDao {
     public User findAllByCompanyAndUsername(String username, String company) {
         return userRepository.findAllByCompanyAndUsername(username,company);
     }
+
+    @Override
+    public User findByUserId(Integer userId) {
+        return userRepository.findByUserId(userId);
+    }
 }

@@ -19,8 +19,7 @@ public class TokenUtil {
             Date expiresAt = new Date(System.currentTimeMillis() + EXPIRE_TIME);
             token = JWT.create()
                     .withIssuer("auth0")
-                    .withClaim("company", userInfo.getCompany())
-                    .withClaim("trader", userInfo.getTrader())
+                    .withClaim("userId", userInfo.getUserId())
                     .withExpiresAt(expiresAt)
                     .sign(Algorithm.HMAC256(TOKEN_SECRET));
         } catch (Exception e) {
@@ -41,7 +40,7 @@ public class TokenUtil {
             }
             System.out.println("认证通过：");
             System.out.println("issuer: " + jwt.getIssuer());
-            System.out.println("username: " + jwt.getClaim("username").asString());
+            System.out.println("userId: " + jwt.getClaim("userId").asString());
             System.out.println("过期时间：      " + jwt.getExpiresAt());
             return true;
         } catch (Exception e) {
