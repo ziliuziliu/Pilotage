@@ -4,7 +4,7 @@
 
 如{msg:success,status:200,data:{test:1}}
 
-1. /trader/order
+1. 登陆: /trader/login
 
    method:POST
 
@@ -12,12 +12,39 @@
 
    body:
 
+   company string
+
+   username string
+
+   password string
+
+   return data:
+
+   userId Integer
+
+   company string
+
+   username string
+
+   token string
+
+   
+
+2. 下订单 /trader/order
+
+   method:POST
+
+   content-type:application/json
+
+   body:
+
+   + Integer userId
+
    - product: String
    - quantity: Integer
    - price: Integer
    - side: String (BUY, SELL)
    - type: String (MARKET, LIMIT, STOP, CANCEL)
-   - Integer userId
    - 根据四种订单，可只传一部分字段
 
    return data:
@@ -26,7 +53,7 @@
 
    ​	status String 表示订单状态
 
-2. /trader/order
+3. 获取订单 /trader/order
 
    method:GET
 
@@ -40,47 +67,23 @@
 
    ​	List[	
 
-   ​	orderId String
+   ​		orderId String
 
-   ​	status String
+   ​		status String
 
-   - product: String
-   - quantity: Integer
-   - price: Integer
-   - side: String (BUY, SELL)
-   - type: String (MARKET, LIMIT, STOP, CANCEL)
+   ​		product: String
+
+   ​		quantity: Integer
+
+   ​		price: Integer
+
+   ​		side: String (BUY, SELL)
+
+   ​		type: String (MARKET, LIMIT, STOP, CANCEL)
 
    ​	]
 
-2. /trader/market
-
-   content-type:websocket
-
-   Query:
-
-   product String 
-
-   broker String
-
-   return data:
-
-   ​	product: String
-
-   ​	broker: String
-
-   ​	currentPrice: Integer
-
-   ​	buyPrice: Integer[] (买1 -> 买5)
-
-   ​	buyAmount: Integer[]
-
-   ​	sellPrice: Integer[] (卖1 -> 卖5)
-
-   ​	sellAmount: Integer[]
-
-2. 
-
-3. /trader/order/transaction
+4. 获取成交记录: /trader/transaction
 
    method:GET
 
@@ -118,8 +121,28 @@
 
    ​	]
 
-5. /trader/login
+5. /trader/market
 
-   method:POST
+   content-type:websocket
 
-   content-type:
+   Query:
+
+   product String 
+
+   broker String
+
+   return data:
+
+   ​	product: String
+
+   ​	broker: String
+
+   ​	currentPrice: Integer
+
+   ​	buyPrice: Integer[] (买1 -> 买5)
+
+   ​	buyAmount: Integer[]
+
+   ​	sellPrice: Integer[] (卖1 -> 卖5)
+
+   ​	sellAmount: Integer[]
