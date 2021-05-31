@@ -1,11 +1,11 @@
 <template>
   <header>
-   <div class="logo"> 
+   <div class="logo">
        <router-link to="/" id="router-li">Pilotage</router-link>
     </div>
    <div class="log-reg">
        <div id="login">
-           <button type="button" class="btn btn-danger">Log in</button>
+           <button type="button" class="btn btn-danger" @click="goToLogin()">Log in</button>
        </div>
        <div id="register">
            <button type="button" class="btn btn-success">Register</button>
@@ -17,6 +17,11 @@
 <script>
 
 export default {
+    methods:{
+        goToLogin(){
+            this.$router.push('/login');
+        }
+    }
 }
 </script>
 

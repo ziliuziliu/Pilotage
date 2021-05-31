@@ -13,7 +13,7 @@
             <div id="username">
                 <FormItem>
                 <input type="text" v-model="loginForm.username" />
-                <label>Your name</label>
+                <label>Username</label>
                 </FormItem>
             </div>
             <div id="login-password">
