@@ -7,6 +7,7 @@ import lombok.Data;
 public class OrderStatusInfo {
     String orderId;
     OrderStatus status;
+    String message;
 
     public OrderStatusInfo(String orderId, OrderStatus status) {
         this.orderId = orderId;

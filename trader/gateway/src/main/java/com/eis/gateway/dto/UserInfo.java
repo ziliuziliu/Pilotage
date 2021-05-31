@@ -4,7 +4,9 @@ import lombok.Data;
 
 @Data
 public class UserInfo {
-    String company;
-    String trader;
-    String token;
+    private Integer userId;
+    private String company;
+    private String username;
+    private String password;
+    private String token;
 }

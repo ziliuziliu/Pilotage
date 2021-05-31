@@ -9,6 +9,7 @@ import com.eis.transmit.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Objects;
 
 @Repository
@@ -25,5 +26,17 @@ public class OrderDaoImpl implements OrderDao {
         orderRepository.save(order);
         TransmitApplication.logger.info(TAG+ "order save");
         return new OrderStatusInfo(order.getOrderId(),order.getStatus());
+    }
+
+    @Override
+    public OrderStatusInfo updateStatusByOrderId(OrderStatusInfo orderStatusInfo) {
+        Objects.requireNonNull(orderStatusInfo,TAG+" updateStatusByOrderId: null orderStatus");
+        orderRepository.updateStatusByOrderId(orderStatusInfo.getStatus().toString(),orderStatusInfo.getOrderId());
+        return orderStatusInfo;
+    }
+
+    @Override
+    public List<Order> findAllByUserId(Integer userId) {
+        return orderRepository.findAllByUserId(userId);
     }
 }

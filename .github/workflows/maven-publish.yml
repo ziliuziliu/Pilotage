@@ -52,3 +52,9 @@ jobs:
         cd ./broker/process
         docker build -t registry.cn-hangzhou.aliyuncs.com/pilotage/broker-process:v$GITHUB_RUN_NUMBER .
         docker push registry.cn-hangzhou.aliyuncs.com/pilotage/broker-process:v$GITHUB_RUN_NUMBER
+        
+    - name: docker build broker-broadcast
+      run: |
+        cd ./broker/broadcast
+        docker build -t registry.cn-hangzhou.aliyuncs.com/pilotage/broker-broadcast:v$GITHUB_RUN_NUMBER .
+        docker push registry.cn-hangzhou.aliyuncs.com/pilotage/broker-broadcast:v$GITHUB_RUN_NUMBER

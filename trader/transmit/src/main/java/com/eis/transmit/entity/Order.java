@@ -15,34 +15,28 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="order")
-@JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "orderId")
+@Table(name="trader-order")
 @Data
 public class Order {
     @Id
     private String orderId;
+    private Integer userId;
     private String product;
     private Integer quantity;
     private Integer price;
     private OrderStatus status;
     private UserSide side;
     private OrderType type;
-    private String company;
-    private String trader;
-    private Long id;
 
     public Order(){}
 
-    public Order(String orderId, String product, Integer quantity, Integer price,
-                 UserSide side, OrderType type, String trader,String company) {
+    public Order(String orderId, Integer userId,String product, Integer quantity, Integer price,
+                 UserSide side, OrderType type) {
         this.orderId = orderId;
         this.product = product;
         this.quantity = quantity;
         this.price = price;
         this.side = side;
         this.type = type;
-        this.trader = trader;
-        this.company=company;
     }
 }
