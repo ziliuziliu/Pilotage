@@ -30,18 +30,22 @@
                 <div >
                     Current Price:{{marketDepthResult.currentPrice}}
                 </div>
-                <div >
-                    Buy Price:{{marketDepthResult.buyPrice}}
-                </div>
-                <div >
-                    Buy Amount:{{marketDepthResult.buyAmount}}
-                </div>
-                <div >
-                    Sell Price:{{marketDepthResult.sellPrice}}
-                </div>
-                <div >
-                    Sell Amount:{{marketDepthResult.sellPrice}}
-                </div>
+                    <div >
+                        <div>Buy Price ----- Amount</div>
+                        <ul>
+                            <li  v-bind:key="item" v-for="(item, index) in marketDepthResult.buyPrice" >
+                                buy{{ index + 1}} - {{ item }} ----- {{marketDepthResult.buyAmount[index]}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div >
+                        <div>Sell Price ----- Amount</div>
+                        <ul>
+                            <li  v-bind:key="item" v-for="(item, index) in marketDepthResult.sellPrice" >
+                                sell{{ index + 1}}  -  {{ item }} ----- {{marketDepthResult.sellAmount[index]}}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </el-form>
             <div>
@@ -72,13 +76,13 @@
                     broker: ''
                 },
                 marketDepthResult:{
-                    product: "ssss",
-                    broker: "qqq",
-                    currentPrice: 7,
-                    buyPrice: [1,2],
-                    buyAmount: [2,3],
-                    sellPrice: [4,5],
-                    sellAmount:[1,2],
+                    product: "",
+                    broker: "",
+                    currentPrice: null,
+                    buyPrice: [],
+                    buyAmount: [],
+                    sellPrice: [],
+                    sellAmount:[],
                 },
                 handled : false
             }
@@ -90,7 +94,7 @@
 
                         requestMarketDepth(product, broker).then((res) => {
                             console.log(res);
-                            if (res.status === 200 && res.data.status === 200) {
+                            if (res.status === 200 && res.msg === "success") {
                                 this.handled= true;
                                 this.marketDepthResult.product = res.data.product;
                                 this.marketDepthResult.broker = res.data.broker;
@@ -120,10 +124,11 @@
     .form1{
         margin: auto;
         margin-left: 150px;
+        margin-top: 90px;
         color: #66fcf1;
     }
     .form2{
-        margin-top: 50px;
+        margin-top: 80px;
         margin-right: 200px;
         color: #66fcf1;
     }
@@ -177,7 +182,6 @@
         background: rgba(33, 150, 243, 0.3);
     }
 
-    /*       Just setting CSS for the page   */
 
     @import url(http://fonts.googleapis.com/css?family=Roboto:400,100,900);
     .button {
