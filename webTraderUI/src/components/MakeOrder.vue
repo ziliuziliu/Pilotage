@@ -51,10 +51,10 @@
             <el-form id="result" class="form2">
                 <div v-if="handled">
                 <div>
-                OrderId:{{newOrderResult.orderId}}
+                OrderId: {{newOrderResult.orderId}}
                 </div>
                 <div >
-                 Order Status:{{newOrderResult.orderStatus}}
+                 Order Status: {{newOrderResult.orderStatus}}
                 </div>
                 </div>
             </el-form>
@@ -64,10 +64,10 @@
 </template>
 
 <script>
-    import Header from "@/common/Header";
-    import Menu from "@/common/Menu";
-    import Footer from "@/common/Footer";
-    import {requestMakeNewOrder} from "@/api/request";
+    import Header from '../common/Header'
+    import Menu from '../common/Menu'
+    import Footer from '../common/Footer'
+    import { requestMakeNewOrder } from '../api/request'
 
     export default {
         name: "MakeOrder",
@@ -101,10 +101,9 @@
                 let side = this.newOrderForm.side;
                 let type = this.newOrderForm.type;
                 let trader = this.newOrderForm.trader;
-
                 requestMakeNewOrder(product, quantity,price,side,type, trader).then((res) => {
                     console.log(res);
-                    if (res.status === 200 && res.data.status === 200) {
+                    if (res.status === 200 && res.msg === "success") {
                         this.handled = true;
                         this.newOrderResult.orderId = res.data.orderId;
                         this.newOrderResult.orderStatus = res.data.orderStatus;

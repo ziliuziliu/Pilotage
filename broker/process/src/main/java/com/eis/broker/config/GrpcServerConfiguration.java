@@ -4,6 +4,7 @@ import com.eis.broker.endpoint.DispatchGrpcService;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
@@ -18,7 +19,8 @@ public class GrpcServerConfiguration {
         this.dispatchGrpcService = dispatchGrpcService;
     }
 
-    private int port = 8081;
+    @Value("${broker.process.grpc.port}")
+    private int port;
     private Server server;
 
     public void start() throws IOException {

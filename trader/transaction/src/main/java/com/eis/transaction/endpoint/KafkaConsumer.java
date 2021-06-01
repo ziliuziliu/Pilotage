@@ -14,7 +14,7 @@ public class KafkaConsumer {
     @Autowired
     private BlotterDao blotterDao;
 
-    @KafkaListener(topics={"TRANSACTION"})
+    @KafkaListener(topics="TRANSACTION")
     public void saveBlotter(String record) {
         TransactionApplication.logger.info(TAG+"receive order blotter from kafka: "+record);
         Blotter blotter=TransactionApplication.gson.fromJson(record,Blotter.class);

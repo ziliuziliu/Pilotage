@@ -21,11 +21,11 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public OrderStatusInfo saveOrder(Order order) {
-        order.setStatus(OrderStatus.WAITING);
+        order.setStatus(OrderStatus.WAITING.toString());
         Objects.requireNonNull(order,TAG+" saveOrder: null order");
         orderRepository.save(order);
         TransmitApplication.logger.info(TAG+ "order save");
-        return new OrderStatusInfo(order.getOrderId(),order.getStatus());
+        return new OrderStatusInfo(order.getOrderId(),OrderStatus.valueOf(order.getStatus()));
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.eis.common.util.Msg;
 import com.eis.common.util.MsgCode;
 import com.eis.gateway.GatewayApplication;
 import com.eis.gateway.util.TokenUtil;
+import com.google.gson.Gson;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -28,8 +29,8 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json; charset=utf-8");
         try {
-            Msg msg=new Msg(MsgCode.AUTHENTICATION_FAILURE,null);
-            response.getWriter().append(msg.toString());
+            Msg msg=new Msg<>(MsgCode.AUTHENTICATION_FAILURE,null);
+            response.getWriter().append(GatewayApplication.gson.toJson(msg));
             GatewayApplication.logger.info(TAG+"authentication failure");
         } catch (Exception e) {
             e.printStackTrace();

@@ -79,9 +79,10 @@ public class OrderServiceImpl implements OrderService {
             TransmitApplication.logger.info(TAG+"null user");
             return null;
         }
+        System.out.println(userInfo.toString());
         OrderInfo orderInfo=new OrderInfo(orderId,product,quantity,price,side,type,userInfo.getCompany(),userInfo.getUsername());
         kafkaTemplate.send("ORDER",getHashCode(product),product,TransmitApplication.gson.toJson(orderInfo));
-        Order order=new Order(orderId,userId,product,quantity,price,side,type);
+        Order order=new Order(orderId,userId,product,quantity,price,side.toString(),type.toString());
         return orderDao.saveOrder(order);
     }
 

@@ -12,13 +12,13 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name="blotter")
+@Table(name="trader_blotter")
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "bookId")
 public class Blotter {
     @Id
     String tradeId;
-    String orderId;
+    String broker;
     String product;
     Integer price;
     Integer quantity;
@@ -26,5 +26,5 @@ public class Blotter {
     String sellCompany;
     String buyName;
     String buyCompany;
-    UserSide initSide;
+    String initSide;
 }

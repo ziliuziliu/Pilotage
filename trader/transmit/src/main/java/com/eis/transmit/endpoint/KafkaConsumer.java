@@ -16,7 +16,7 @@ public class KafkaConsumer {
 
     @KafkaListener(topics = "STATUS")
     public void receive(String record){
-        TransmitApplication.logger.info(TAG+"receive order blotter from kafka: "+record);
+        TransmitApplication.logger.info(TAG+"receive status from kafka: "+record);
         OrderStatusInfo orderStatusInfo=TransmitApplication.gson.fromJson(record,OrderStatusInfo.class);
         orderDao.updateStatusByOrderId(orderStatusInfo);
     }

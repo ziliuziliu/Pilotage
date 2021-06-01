@@ -23,19 +23,18 @@ public class KafkaProducer {
     public void sendMsg(TransactionMsg msg) {
         String json = gson.toJson(msg, msg.getClass());
         logger.info(json);
-//        kafkaTemplate.send(msg.getBuyCompany() + "-transaction", json);
-//        kafkaTemplate.send(msg.getSellCompany() + "-transaction", json);
+        kafkaTemplate.send("TRANSACTION", json);
     }
 
     public void sendMsg(OrderStatusMsg msg) {
         String json = gson.toJson(msg, msg.getClass());
         logger.info(json);
-//        kafkaTemplate.send(msg.getTargetCompany() + "-status", json);
+        kafkaTemplate.send("STATUS", json);
     }
 
     public void sendMsg(OrderMsg msg) {
         String json = gson.toJson(msg, msg.getClass());
         logger.info(json);
-//        kafkaTemplate.send(ORDER_TOPIC, json);
+        kafkaTemplate.send("ORDER", json);
     }
 }

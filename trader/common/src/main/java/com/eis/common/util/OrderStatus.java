@@ -1,5 +1,5 @@
 package com.eis.common.util;
 
 public enum OrderStatus {
-    WAITING,CANCELED,FINISHED
+    WAITING,CANCELED,FINISHED,EXECUTED
 }

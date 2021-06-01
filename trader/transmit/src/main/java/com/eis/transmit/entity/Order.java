@@ -15,7 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="trader-order")
+@Table(name="trader_order")
 @Data
 public class Order {
     @Id
@@ -24,14 +24,15 @@ public class Order {
     private String product;
     private Integer quantity;
     private Integer price;
-    private OrderStatus status;
-    private UserSide side;
-    private OrderType type;
+    private String status;
+    private String side;
+    private String type;
 
     public Order(){}
 
     public Order(String orderId, Integer userId,String product, Integer quantity, Integer price,
-                 UserSide side, OrderType type) {
+                 String side, String type) {
+        this.userId=userId;
         this.orderId = orderId;
         this.userId = userId;
         this.product = product;

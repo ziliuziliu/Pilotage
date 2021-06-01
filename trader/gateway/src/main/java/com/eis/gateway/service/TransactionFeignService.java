@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(url="${trader-transaction-service}")
+@FeignClient(url="${trader-transaction-service}",value = "trader-transaction-service")
 public interface TransactionFeignService {
     @RequestMapping(value="/transaction",method = RequestMethod.GET)
     Msg<List<TransactionInfo>> findTransactionByUserId(@RequestParam("userId")Integer userId);

@@ -5,6 +5,7 @@ import MakeOrder from "./components/MakeOrder";
 import MarketDepth from "./components/MarketDepth";
 import CheckOrder from "./components/CheckOrder";
 import MyOrders from "./components/MyOrders";
+import Login from "./components/Login";
 
 Vue.use(Router);
 
@@ -14,6 +15,16 @@ export default new Router({
     routes: [
         {
             path: '/',
+            name: 'Login',
+            component: Login
+        },
+        {
+            path: '/login',
+            name: 'Login',
+            component: Login
+        },
+        {
+            path: '/main',
             name: 'Main',
             component: Main
         },
