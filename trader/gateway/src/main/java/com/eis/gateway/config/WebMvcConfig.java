@@ -13,8 +13,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         List<String> excludePath = new ArrayList<>();
-        excludePath.add("/trader/market");
-        excludePath.add("/user");
+        excludePath.add("/trader/login");
         registry.addInterceptor(new AuthenticationInterceptor()).addPathPatterns("/trader/**")
                 .excludePathPatterns(excludePath);
     }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/trader")
 public class OrderController {
     @Autowired
     private OrderFeignService orderFeignService;

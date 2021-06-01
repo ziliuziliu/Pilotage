@@ -3,6 +3,7 @@ package com.eis.user.controller;
 import com.eis.common.util.Msg;
 import com.eis.common.util.MsgCode;
 import com.eis.common.util.MsgUtil;
+import com.eis.user.UserApplication;
 import com.eis.user.entity.User;
 import com.eis.user.service.UserService;
 import com.google.gson.JsonObject;
@@ -24,8 +25,10 @@ public class UserController {
         String password=jsonObject.get("password").getAsString();
         User user=userService.login(username,password,company);
         if(user==null){
+            UserApplication.logger.info("user not found");
             return new Msg<>(MsgCode.AUTHENTICATION_FAILURE,null);
         }
+        System.out.println(user.toString());
         return new Msg<>(MsgCode.SUCCESS,user);
     }
 

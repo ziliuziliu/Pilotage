@@ -13,9 +13,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String username, String password, String company) {
-        User user=userDao.findAllByCompanyAndUsername(username,password);
-        if(user!=null&&user.getPassword().equals(password)){
-            return user;
+        User user=userDao.findAllByCompanyAndUsername(company,username);
+        if(user!=null){
+            if(user.getPassword().equals(password)){
+                user.setPassword(null);
+                return user;
+            }
+
         }
         return null;
     }

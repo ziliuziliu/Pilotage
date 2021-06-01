@@ -1,5 +1,8 @@
 package com.eis.common.util;
 
+import lombok.Data;
+
+@Data
 public class Msg<T> {
     private int status;
     private String msg;
@@ -11,35 +14,35 @@ public class Msg<T> {
         this.data = data;
     }
 
-    public Msg(MsgCode msg, String extra, T data) {
-        this.status = msg.getStatus();
-        this.msg = extra;
-        this.data = data;
-    }
-
-    public Msg(MsgCode msg) {
-        this.status = msg.getStatus();
-        this.msg = msg.getMsg();
-        this.data = null;
-    }
-
-    public Msg(MsgCode msg, String extra) {
-        this.status = msg.getStatus();
-        this.msg = extra;
-        this.data = null;
-    }
-
-    public Msg(int status, String extra, T data) {
-        this.status = status;
-        this.msg = extra;
-        this.data = data;
-    }
-
-    public Msg(int status, String extra) {
-        this.status = status;
-        this.msg = extra;
-        this.data = null;
-    }
+//    public Msg(MsgCode msg, String extra, T data) {
+//        this.status = msg.getStatus();
+//        this.msg = extra;
+//        this.data = data;
+//    }
+//
+//    public Msg(MsgCode msg) {
+//        this.status = msg.getStatus();
+//        this.msg = msg.getMsg();
+//        this.data = null;
+//    }
+//
+//    public Msg(MsgCode msg, String extra) {
+//        this.status = msg.getStatus();
+//        this.msg = extra;
+//        this.data = null;
+//    }
+//
+//    public Msg(int status, String extra, T data) {
+//        this.status = status;
+//        this.msg = extra;
+//        this.data = data;
+//    }
+//
+//    public Msg(int status, String extra) {
+//        this.status = status;
+//        this.msg = extra;
+//        this.data = null;
+//    }
 
     public int getStatus() {
         return status;
@@ -63,15 +66,5 @@ public class Msg<T> {
 
     public void setData(T data) {
         this.data = data;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Msg{" +
-                "status=" + status +
-                ", msg='" + msg + '\'' +
-                ", data=" + data +
-                '}';
     }
 }

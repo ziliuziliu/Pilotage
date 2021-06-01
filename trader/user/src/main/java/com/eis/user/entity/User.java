@@ -16,7 +16,7 @@ public class User {
     private Integer userId;
     private String company;
     private String username;
-    private transient String password;
+    private String password;
 
     public User(){}
 

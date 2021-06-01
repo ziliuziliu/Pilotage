@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(url="${trader-transmit-service}")
+@FeignClient(url="${trader-transmit-service}",value="trader-transmit-service")
 public interface OrderFeignService {
     @RequestMapping(value = "/order",method = RequestMethod.POST)
     Msg<OrderStatusInfo> addOrder(@RequestBody JsonObject jsonObject);
