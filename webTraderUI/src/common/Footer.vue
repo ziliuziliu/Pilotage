@@ -1,47 +1,8 @@
 <template>
     <div>
-        <div id="location">
-            <img src="https://img.icons8.com/ios/2x/4a90e2/marker.png" alt="" width="40px">
-            <!-- <img src="@/images/location3.png" alt="" height="60px"> -->
-            <p>Our Location</p>
-        </div>
-        <div id="map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10378.856605475714!2d121.4381666604976!3d31.031821822198015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb1783b676afc1cfa!2z5LiK5rW35Lqk6YCa5aSn5a2m6L2v5Lu25a2m6Zmi!5e0!3m2!1sen!2skz!4v1621346193542!5m2!1sen!2skz" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
         <div>
             <div id="join">
-                <p id="join-soc">Join to Social Community</p>
-                <span id="icons">
-                    <ul>
-                <li>
-                    <!-- <a href="#"> <i class="fa fa-facebook" aria-hidden="true"></i> </a> -->
-                    <a href="#"><font-awesome-icon :icon="['fab', 'weibo']"/></a>
-                    <span></span><span></span><span></span><span></span>
-                </li>
-                <li>
-                    <!-- <a href="#"> <i class="fa fa-twitter" aria-hidden="true"></i> </a> 
-                    <span></span><span></span><span></span><span></span> -->
-                    <a href="#"><font-awesome-icon :icon="['fab', 'alipay']"/></a>
-                    <span></span><span></span><span></span><span></span>
-                </li>
-                <li>
-                    <!-- <a href="#"> <i class="fa fa-google-plus" aria-hidden="true"></i> </a> 
-                    <span></span><span></span><span></span><span></span> -->
-                    <a href="#"><font-awesome-icon :icon="['fab', 'qq']"/></a>
-                    <span></span><span></span><span></span><span></span>
-                </li>
-                <li>
-                    <!-- <a href="#"> <i class="fa fa-linkedin" aria-hidden="true"></i> </a> 
-                    <span></span><span></span><span></span><span></span> -->
-                    <a href="#"><font-awesome-icon :icon="['fab', 'instagram']"/></a>
-                    <span></span><span></span><span></span><span></span>
-                </li>
-                <li>
-                    <!-- <a href="#"> <i class="fa fa-skype" aria-hidden="true"></i> </a> 
-                    <span></span><span></span><span></span><span></span> -->
-                    <a href="#"><font-awesome-icon :icon="['fab', 'tiktok']"/></a>
-                    <span></span><span></span><span></span><span></span>
-                </li>
-             </ul>
-                </span>
+                <p id="join-soc">Pilotage 2021</p>
             </div>
         </div>
     </div>
@@ -56,7 +17,7 @@ export default{}
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
 *{
     padding: 0;
-    margin: 0; 
+    margin: 0;
     font-family: 'Quicksand', sans-serif;
     color: #66FCF1;
    }
@@ -88,8 +49,8 @@ img{
 }
 ul{
     position: relative;
-    top: 40%;  
-    width: 100%;  
+    top: 40%;
+    width: 100%;
     text-align: center;
     transform: translateY(-50%);
     white-space: nowrap;
@@ -104,7 +65,7 @@ ul li{
 ul li a{
     position: relative;
     display: inline-block;
-    color: #66FCF1; 
+    color: #66FCF1;
     font-size: 40px;
     width: 100%;  height: 100%;
     text-align: center;   line-height: 120px;
@@ -132,7 +93,7 @@ ul li span:nth-of-type(2){
    transform: scale(1);
 }
 ul li span:nth-of-type(3){
-   top: 0;   left: 0; 
+   top: 0;   left: 0;
    transform-origin: bottom;
    transform: scale(0);
 }

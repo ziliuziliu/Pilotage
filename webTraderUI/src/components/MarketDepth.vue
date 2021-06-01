@@ -8,8 +8,6 @@
                 <h2>Market Depth</h2>
                     <input type="text" placeholder="Product" v-model="marketForm.product"/>
                     <label>Product</label>
-                    <input type="text" placeholder="Broker" v-model="marketForm.broker"/>
-                    <label>Broker</label>
                 <div class="button">
                     <div class="set_7_btn-wrapper">
                         <svg height="45" width="150">
@@ -90,9 +88,8 @@
         methods: {
             handleRequest(){
                         let product = this.marketForm.product;
-                        let broker = this.marketForm.broker;
-
-                        requestMarketDepth(product, broker).then((res) => {
+                        console.log(product);
+                        requestMarketDepth(product).then((res) => {
                             console.log(res);
                             if (res.status === 200 && res.msg === "success") {
                                 this.handled= true;
