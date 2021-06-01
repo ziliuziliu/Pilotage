@@ -20,6 +20,25 @@ export const requestMakeNewOrder=(product, quantity,price,side,type, trader) => 
             side: side,
             type:type,
             trader: trader
+        },
+        headers:{
+            token: this.GLOBAL.token
+        }
+    })
+};
+export const requestMyOrders=(formData) => {
+    axios.get(`${traderUrl}/order`, formData, {
+        headers:{
+            token: this.GLOBAL.token
+        }
+    })
+};
+export const requestLogin=(company, username, password) => {
+    axios.post(`${traderUrl}/login`,{
+        params:{
+            company: company,
+            username: username,
+            password: password
         }
     })
 };
