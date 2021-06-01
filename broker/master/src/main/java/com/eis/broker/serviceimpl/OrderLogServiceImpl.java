@@ -27,7 +27,7 @@ public class OrderLogServiceImpl implements OrderLogService {
         logger.info("----writing log for order " + orderLog.getOrderId() + "----");
         orderLog.setLogId(UUID.randomUUID().toString().replaceAll("-", ""));
         orderLogDao.save(orderLog);
-        logger.info("----writing log for order " + orderLog.getOrderId() + "completed----");
+        logger.info("----writing log for order " + orderLog.getOrderId() + " completed----");
     }
 
 }

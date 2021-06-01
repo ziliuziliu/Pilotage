@@ -12,4 +12,6 @@ public interface OrderService {
                              UserSide side, OrderType type,Integer userId);
 
     List<Order> findAllByUserId(Integer userId);
+
+    boolean batch(String product, Integer quantity, UserSide side, Integer userId);
 }

@@ -33,10 +33,12 @@ public class Order {
     public Order(String orderId, Integer userId,String product, Integer quantity, Integer price,
                  UserSide side, OrderType type) {
         this.orderId = orderId;
+        this.userId = userId;
         this.product = product;
         this.quantity = quantity;
         this.price = price;
         this.side = side;
         this.type = type;
     }
+
 }

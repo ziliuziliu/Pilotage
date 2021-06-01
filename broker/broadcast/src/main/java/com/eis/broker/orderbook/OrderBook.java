@@ -29,7 +29,7 @@ public class OrderBook implements Serializable {
 
         Random random = new Random();
         this.currentPrice = random.nextInt(1000) + 1000;
-        for (int i=0;i<5;i++) {
+        for (int i=0;i<10;i++) {
             Integer sellPrice = this.currentPrice + i * Constant.interval;
             LinkedList<Order> orders = new LinkedList<>();
             orders.push(new Order(UUID.randomUUID().toString().replaceAll("-", ""), sellPrice,
@@ -38,7 +38,7 @@ public class OrderBook implements Serializable {
             this.buyStopOrder.put(sellPrice, new LinkedList<>());
             this.sellVolume.put(sellPrice, 100);
         }
-        for (int i=0;i<5;i++) {
+        for (int i=0;i<10;i++) {
             Integer buyPrice = this.currentPrice - (i+1) * Constant.interval;
             LinkedList<Order> orders = new LinkedList<>();
             orders.push(new Order(UUID.randomUUID().toString().replaceAll("-", ""), buyPrice,
@@ -183,10 +183,12 @@ public class OrderBook implements Serializable {
             while (limitOrders.size() != 0 && limitOrders.getFirst().getQuantity() == 0)
                 limitOrders.pop();
             if (limitOrders.size() == 0) {
-                for (Order stopOrder : buyStopOrder.get(price + Constant.interval))
-                    msgs.add(new OrderMsg(stopOrder.getOrderId(), product, stopOrder.getQuantity(), "BUY", "MARKET",
-                            stopOrder.getCompany(), stopOrder.getTrader()));
-                buyStopOrder.remove(price + Constant.interval);
+                if (buyStopOrder.containsKey(price + Constant.interval)) {
+                    for (Order stopOrder : buyStopOrder.get(price + Constant.interval))
+                        msgs.add(new OrderMsg(stopOrder.getOrderId(), product, stopOrder.getQuantity(), "BUY", "MARKET",
+                                stopOrder.getCompany(), stopOrder.getTrader()));
+                    buyStopOrder.remove(price + Constant.interval);
+                }
             }
             if (remainQuantity == 0) break;
         }
@@ -218,10 +220,12 @@ public class OrderBook implements Serializable {
             while (limitOrders.size() != 0 && limitOrders.getFirst().getQuantity() == 0)
                 limitOrders.pop();
             if (limitOrders.size() == 0) {
-                for (Order stopOrder : sellStopOrder.get(price - Constant.interval))
-                    msgs.add(new OrderMsg(stopOrder.getOrderId(), product, stopOrder.getQuantity(), "SELL", "MARKET",
-                            stopOrder.getCompany(), stopOrder.getTrader()));
-                sellStopOrder.remove(price - Constant.interval);
+                if (sellStopOrder.containsKey(price - Constant.interval)) {
+                    for (Order stopOrder : sellStopOrder.get(price - Constant.interval))
+                        msgs.add(new OrderMsg(stopOrder.getOrderId(), product, stopOrder.getQuantity(), "SELL", "MARKET",
+                                stopOrder.getCompany(), stopOrder.getTrader()));
+                    sellStopOrder.remove(price - Constant.interval);
+                }
             }
             if (remainQuantity == 0) break;
         }

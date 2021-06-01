@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,9 @@ public class OrderBookServiceImpl implements OrderBookService {
     private RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
+    @Autowired
     private KafkaProducer kafkaProducer;
 
     @Autowired
@@ -39,6 +43,7 @@ public class OrderBookServiceImpl implements OrderBookService {
     public OrderBook initOrderBook(String product) {
         OrderBook orderBook = new OrderBook(product);
         redisTemplate.opsForValue().set("orderbook-" + product, orderBook);
+        stringRedisTemplate.opsForValue().set("quantity-" + product, "0");
         return orderBook;
     }
 
@@ -96,6 +101,11 @@ public class OrderBookServiceImpl implements OrderBookService {
         logger.info("----broadcasting----");
         msgs.forEach(m -> {
             if (m instanceof TransactionMsg) {
+                String quantity = stringRedisTemplate.opsForValue().get("quantity-" + product);
+                if (quantity != null) {
+                    int newQ = Integer.parseInt(quantity) + ((TransactionMsg) m).getQuantity();
+                    stringRedisTemplate.opsForValue().set("quantity-" + product, Integer.toString(newQ));
+                }
                 transactionDao.save(new TransactionData((TransactionMsg) m));
                 kafkaProducer.sendMsg((TransactionMsg) m);
             }
