@@ -2,11 +2,10 @@ import axios from 'axios'
 
 let serverUrl = 'http://localhost:8888';
 let traderUrl = serverUrl+'/trader';
-export const requestMarketDepth=(product, broker) => {
-    axios.get(`${traderUrl}/market`,{
+export const requestMarketDepth=(product) => {
+    axios.get('http://localhost:8000/process/product/getMarketDepth',{
         params:{
-            product: product,
-            broker: broker
+            product: product
         }
 })
 };
