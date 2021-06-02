@@ -41,6 +41,24 @@ jobs:
         docker build -t registry.cn-hangzhou.aliyuncs.com/pilotage/trader-transmit:v$GITHUB_RUN_NUMBER .
         docker push registry.cn-hangzhou.aliyuncs.com/pilotage/trader-transmit:v$GITHUB_RUN_NUMBER
         
+    - name: docker build trader-gateway
+      run: |
+        cd ./trader/gateway
+        docker build -t registry.cn-hangzhou.aliyuncs.com/pilotage/trader-gateway:v$GITHUB_RUN_NUMBER .
+        docker push registry.cn-hangzhou.aliyuncs.com/pilotage/trader-gateway:v$GITHUB_RUN_NUMBER
+        
+    - name: docker build trader-transaction
+      run: |
+        cd ./trader/transaction
+        docker build -t registry.cn-hangzhou.aliyuncs.com/pilotage/trader-transaction:v$GITHUB_RUN_NUMBER .
+        docker push registry.cn-hangzhou.aliyuncs.com/pilotage/trader-transaction:v$GITHUB_RUN_NUMBER
+        
+    - name: docker build trader-user
+      run: |
+        cd ./trader/user
+        docker build -t registry.cn-hangzhou.aliyuncs.com/pilotage/trader-user:v$GITHUB_RUN_NUMBER .
+        docker push registry.cn-hangzhou.aliyuncs.com/pilotage/trader-user:v$GITHUB_RUN_NUMBER
+        
     - name: docker build broker-master
       run: |
         cd ./broker/master
