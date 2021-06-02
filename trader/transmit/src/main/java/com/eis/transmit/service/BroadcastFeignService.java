@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(url="${broker-broadcast-service}")
+@FeignClient(url="${broker-broadcast-service}",name = "broker-broadcast-service")
 public interface BroadcastFeignService {
 
     @RequestMapping(value="/broadcast/analysis/getWeight",method = RequestMethod.GET)
