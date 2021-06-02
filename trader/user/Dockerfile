@@ -1,4 +1,4 @@
-FROM ascdc/jdk8
+FROM anapsix/alpine-java
 VOLUME /tmp
 RUN mkdir /app
 ADD target/user-1.0-SNAPSHOT.jar /app/app.jar
