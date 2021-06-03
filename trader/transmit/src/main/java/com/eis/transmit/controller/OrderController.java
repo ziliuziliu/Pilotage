@@ -43,4 +43,18 @@ public class OrderController {
     public Msg<List<Order>> findByUserId(@RequestParam("userId")Integer userId){
         return new Msg<>(MsgCode.SUCCESS,orderService.findAllByUserId(userId));
     }
+
+    @RequestMapping(value="/iceberg",method=RequestMethod.POST)
+    public Msg<Boolean> iceberg(@RequestBody JsonObject jsonObject){
+        if(!jsonObject.has("product")||!jsonObject.has("side")||
+                !jsonObject.has("type")||!jsonObject.has("userId")){
+            throw new RuntimeException(MsgUtil.PARAM_DEFICIT_MSG);
+        }
+        String product=jsonObject.get("product").getAsString();
+        UserSide side=UserSide.valueOf(jsonObject.get("side").getAsString());
+        Integer userId=jsonObject.get("userId").getAsInt();
+        Integer quantity=jsonObject.get("quantity").getAsInt();
+        return new Msg<>(MsgCode.SUCCESS,orderService.batch(product,quantity,side,userId));
+    }
+
 }
