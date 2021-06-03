@@ -1,10 +1,9 @@
-package com.eis.broker.dao;
+package com.eis.broker.service;
 
 import com.eis.broker.entity.TransactionData;
 
 import java.util.List;
 
-public interface TransactionDao {
-    void save(TransactionData transactionData);
+public interface TransactionService {
     List<TransactionData> findAll();
 }

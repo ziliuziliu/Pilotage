@@ -6,6 +6,8 @@ import com.eis.broker.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -21,4 +23,8 @@ public class ProductServiceImpl implements ProductService {
         return productDao.save(productData);
     }
 
+    @Override
+    public List<ProductData> findAll() {
+        return productDao.findAll();
+    }
 }

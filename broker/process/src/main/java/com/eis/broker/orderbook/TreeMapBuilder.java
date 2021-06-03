@@ -7,6 +7,8 @@ import java.util.TreeMap;
 
 public class TreeMapBuilder implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private static class DescendComparator implements Comparator<Integer>, Serializable {
         @Override
         public int compare(Integer o1, Integer o2) {

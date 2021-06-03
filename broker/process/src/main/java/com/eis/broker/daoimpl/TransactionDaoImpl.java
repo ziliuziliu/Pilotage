@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class TransactionDaoImpl implements TransactionDao {
 
@@ -22,4 +24,8 @@ public class TransactionDaoImpl implements TransactionDao {
         transactionRepository.save(transactionData);
     }
 
+    @Override
+    public List<TransactionData> findAll() {
+        return transactionRepository.findAll();
+    }
 }
