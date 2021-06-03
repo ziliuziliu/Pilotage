@@ -13,6 +13,8 @@ import java.util.*;
 @Data
 public class OrderBook implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private String product;
     private String broker;
     private Integer currentPrice;

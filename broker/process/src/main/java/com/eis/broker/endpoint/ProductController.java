@@ -6,13 +6,13 @@ import com.eis.broker.orderbook.OrderBook;
 import com.eis.broker.service.OrderBookService;
 import com.eis.broker.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/process/product")
+@CrossOrigin
 public class ProductController {
 
     private final ProductService productService;
@@ -37,5 +37,10 @@ public class ProductController {
     @RequestMapping("/getMarketDepth")
     public MarketDepthMsg getMarketDepth(@RequestParam String product) {
         return orderBookService.getMarketDepth(product);
+    }
+
+    @RequestMapping("/findAll")
+    public List<ProductData> findAll() {
+        return productService.findAll();
     }
 }

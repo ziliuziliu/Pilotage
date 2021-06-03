@@ -6,6 +6,8 @@ import com.eis.broker.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class ProductDaoImpl implements ProductDao {
 
@@ -19,6 +21,11 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public ProductData save(ProductData productData) {
         return productRepository.save(productData);
+    }
+
+    @Override
+    public List<ProductData> findAll() {
+        return productRepository.findAll();
     }
 
 }
