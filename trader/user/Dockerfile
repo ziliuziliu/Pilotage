@@ -1,4 +1,4 @@
-FROM anapsix/alpine-java
+FROM registry.cn-shenzhen.aliyuncs.com/javajs/java
 VOLUME /tmp
 RUN mkdir /app
 ADD target/user-1.0-SNAPSHOT.jar /app/app.jar
