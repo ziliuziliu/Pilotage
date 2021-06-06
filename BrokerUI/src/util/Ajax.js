@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let server = "http://localhost:";
+let server = "http://202.120.40.8:";
 export function axiosPost(port, method, json, callback) {
     let url = server + port + method;
     console.log(url);

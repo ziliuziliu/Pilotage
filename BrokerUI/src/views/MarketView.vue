@@ -67,7 +67,7 @@
         methods: {
             initWebSocket(product) {
                 console.log(product);
-                let wsuri = "ws://localhost:8085/marketDepth/broker/" + product;
+                let wsuri = "ws://202.120.40.8:30551/marketDepth/broker/" + product;
                 this.websock = new WebSocket(wsuri, "chat");
                 this.websock.onmessage = this.onMessage;
                 this.websock.onopen = this.onOpen;

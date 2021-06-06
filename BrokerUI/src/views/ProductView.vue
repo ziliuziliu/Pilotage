@@ -58,7 +58,7 @@
             function callback(response) {
                 self.products = response;
             }
-            axiosPost(8082, '/process/product/findAll', {}, callback);
+            axiosPost(30551, '/process/product/findAll', {}, callback);
         },
         methods: {
             toMarket(product)
