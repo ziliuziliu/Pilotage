@@ -21,11 +21,11 @@ public class KafkaConsumer {
         this.orderLogService = orderLogService;
     }
 
-//    @KafkaListener(topics = "ORDER")
-//    public void receive(String msg) {
-//        OrderLog orderLog = gson.fromJson(msg, OrderLog.class);
-//        orderLogService.saveOrderLog(orderLog);
-//        orderQueue.addToQueue(orderLog);
-//    }
+    @KafkaListener(topics = "ORDER")
+    public void receive(String msg) {
+        OrderLog orderLog = gson.fromJson(msg, OrderLog.class);
+        orderLogService.saveOrderLog(orderLog);
+        orderQueue.addToQueue(orderLog);
+    }
 
 }
