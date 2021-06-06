@@ -131,13 +131,6 @@
         font-weight: 400;
     }
 
-
-    .set_7_btn-wrapper:hover #set_7_button4 {
-        stroke-dasharray: 50 0;
-        stroke-width: 3px;
-        stroke-dashoffset: 0;
-        stroke: #66fcf1;
-    }
     table {
         margin: auto;
         font-family: 'Open Sans', sans-serif;

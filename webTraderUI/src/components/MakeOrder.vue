@@ -3,19 +3,18 @@
         <my-header></my-header>
         <div class="menu">
             <my-menu></my-menu>
-
-            <el-form  class="form1">
+            <el-form  class="form1" :model="newOrderForm">
                 <h2>Make Order</h2>
 
-                <input type="text" placeholder="Product" />
+                <input type="text" placeholder="Product" v-model="newOrderForm.product"/>
                 <label>Product</label>
-                <input type="text" placeholder="Broker" />
+                <input type="text" placeholder="Broker" v-model="newOrderForm.quantity"/>
                 <label>Quantity</label>
-                <input type="text" placeholder="Price" />
+                <input type="text" placeholder="Price" v-model="newOrderForm.price"/>
                 <label>Price</label>
                 <br>
                 <label>
-                    <select id="selects">
+                    <select id="selects" v-model="newOrderForm.side">
                         <option disabled value="">Choose the side</option>
                         <option>SELL</option>
                         <option>BUY</option>
@@ -25,7 +24,7 @@
                 <label>Side</label>
                <br>
                 <label >
-                    <select id="selects">
+                    <select id="selects" v-model="newOrderForm.type">
                         <option disabled value="">Choose the type</option>
                         <option>MARKET</option>
                         <option>LIMIT</option>
@@ -35,7 +34,7 @@
                 </label>
                 <br>
                 <label>Type</label>
-                <input type="text" placeholder="Trader" />
+                <input type="text" placeholder="Trader" v-model="newOrderForm.trader"/>
                 <label>Trader</label>
                 <!--                </div>-->
                 <div class="button">
@@ -46,7 +45,6 @@
                         <div id="set_7_text"><a href="" @click="handleRequest()">Make Order</a></div>
                     </div>
                 </div>
-
             </el-form>
             <el-form id="result" class="form2">
                 <div v-if="handled">
@@ -114,7 +112,8 @@
     }
 </script>
 
-<style scoped>
+<style>
+
     * {
         box-sizing: border-box;
     }
@@ -122,7 +121,7 @@
         display: flex;
         justify-content: space-between;
     }
-    .form1{
+  .form1{
         margin: auto;
         margin-left: 150px;
         color: #66fcf1;
@@ -130,7 +129,7 @@
     .form2{
         margin-top: 50px;
         margin-right: 200px;
-             color: #66fcf1;
+        color: #66fcf1;
          }
 
     label {
