@@ -11,25 +11,23 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.eis.traderUI.R;
+import com.eis.traderUI.ui.home.adapter.MarketDepthAdapter;
 
 public class HomeFragment extends Fragment {
+    private RecyclerView sellSideMarket;
+    private RecyclerView buySideMarket;
 
-    private HomeViewModel homeViewModel;
+    private MarketDepthAdapter sellAdapter=new MarketDepthAdapter(getContext().getResources().getString(R.string.market_item_sell_side),getContext());
+    private MarketDepthAdapter buyAdapter=new MarketDepthAdapter(getContext().getResources().getString(R.string.market_item_buy_side),getContext());
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        View root=inflater.inflate(R.layout.fragment_home, container, false);
+        sellSideMarket=root.findViewById(R.id.sellSideMarket);
+        buySideMarket=root.findViewById(R.id.buySideMarket);
         return root;
     }
 }
