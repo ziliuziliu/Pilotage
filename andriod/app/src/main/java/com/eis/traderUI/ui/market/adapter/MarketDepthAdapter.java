@@ -48,7 +48,6 @@ public class MarketDepthAdapter extends RecyclerView.Adapter<TextViewHolder> {
     }
 
     public void updatePriceAndQuantity(@NonNull List<Integer> price,@NonNull List<Integer> quantity){
-        System.out.println("update price and quantity");
         this.priceList.clear();
         this.priceList.addAll(price);
         this.quantityList.clear();

@@ -24,10 +24,13 @@
             android:text="product:"
             android:textSize="24sp" />
 
-        <Spinner
-            android:id="@+id/orderProductSpinner"
+        <TextView
+            android:id="@+id/productNameTitle"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="24sp" />
+
     </LinearLayout>
 
     <LinearLayout

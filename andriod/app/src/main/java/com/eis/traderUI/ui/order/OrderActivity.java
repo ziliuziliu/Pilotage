@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.eis.traderUI.R;
 import com.eis.traderUI.dto.Msg;
@@ -38,7 +40,6 @@ import retrofit2.Response;
 
 public class OrderActivity extends AppCompatActivity {
     public static final String TAG="OrderActivity";
-    private Spinner orderProductSpinner;
     private Spinner orderSideSpinner;
     private Spinner orderTypeSpinner;
     private EditText quantityInput;
@@ -48,19 +49,18 @@ public class OrderActivity extends AppCompatActivity {
     private Button submitButton;
     private Button cancelButton;
     private Switch icebergSwitch;
+    private TextView productNameTitle;
 
     private SpinnerAdapter orderSideAdapter;
     private SpinnerAdapter orderTypeAdapter;
-    private SpinnerAdapter productAdapter;
 
     private final String[] orderSide={"sell","buy"};
     private final String[] orderType={"market order","limit order","stop order","cancel order"};
-    private List<String> productInfoList=new ArrayList<>();
-    private List<ProductData> productDataList;
+    private String productInfo;
+    private String productName;
     private OrderInfo orderInfo=new OrderInfo();
     private boolean iceberg;
 
-    private ProductService productService;
     private OrderService orderService;
 
     private SharedPreferences mySharedPreferences;
@@ -69,13 +69,15 @@ public class OrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
         mySharedPreferences=getApplicationContext().getSharedPreferences("userInfo", Activity.MODE_PRIVATE);
+        Intent intent=getIntent();
+        productName=intent.getStringExtra("productName");
+        productInfo=intent.getStringExtra("productInfo");
+        orderInfo.setProduct(productName);
         bindView();
         bindData();
-        getData();
     }
 
     private void bindView(){
-        orderProductSpinner=findViewById(R.id.orderProductSpinner);
         orderSideSpinner=findViewById(R.id.orderSideSpinner);
         orderTypeSpinner=findViewById(R.id.orderTypeSpinner);
         quantityInput=findViewById(R.id.quantityInput);
@@ -85,9 +87,11 @@ public class OrderActivity extends AppCompatActivity {
         submitButton=findViewById(R.id.submitOrderButton);
         cancelButton=findViewById(R.id.cancelButton);
         icebergSwitch=findViewById(R.id.icebergSwitch);
+        productNameTitle=findViewById(R.id.productNameTitle);
     }
 
     private void bindData(){
+        productNameTitle.setText(productInfo);
         orderSideAdapter=new SpinnerAdapter(Arrays.asList(orderSide),getApplicationContext());
         orderSideSpinner.setAdapter(orderSideAdapter);
         orderSideSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -122,18 +126,6 @@ public class OrderActivity extends AppCompatActivity {
                         priceLayout.setVisibility(View.INVISIBLE);
                         icebergSwitch.setVisibility(View.GONE);
                 }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-        productAdapter=new SpinnerAdapter(productInfoList,getApplicationContext());
-        orderProductSpinner.setAdapter(productAdapter);
-        orderProductSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                System.out.println(productDataList.get(position).getProductName());
-//                orderInfo.setProduct(productDataList.get(position).getProductName());
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -221,36 +213,4 @@ public class OrderActivity extends AppCompatActivity {
             });
         }
     }
-
-    private void getData(){
-        productService= Constant.RETROFIT.create(ProductService.class);
-        Call<List<ProductData>> productCall=productService.getAllProduct();
-        productCall.enqueue(new Callback<List<ProductData>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<ProductData>> call, @NonNull Response<List<ProductData>> response) {
-                if (!response.isSuccessful()) {
-                    Log.e(TAG, "response not success");
-                    return;
-                }
-                if (response.body() == null) {
-                    Log.e(TAG, "receive null body");
-                    return;
-                }
-                final List<ProductData> result=response.body();
-                productDataList=result;
-                for(ProductData item:result){
-                    productInfoList.add(item.getProductInfo());
-                }
-                productAdapter.updateData(productInfoList);
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<ProductData>> call, @NonNull Throwable t) {
-                Log.e(TAG, "fetch order blotter failed");
-                Snackbar.make(submitButton, "接收失败", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-    }
-
 }

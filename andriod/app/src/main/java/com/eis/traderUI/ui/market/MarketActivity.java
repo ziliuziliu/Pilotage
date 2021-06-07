@@ -21,8 +21,10 @@ import com.eis.traderUI.dto.ProductData;
 import com.eis.traderUI.service.ProductService;
 import com.eis.traderUI.ui.common.adapter.SpinnerAdapter;
 import com.eis.traderUI.ui.market.adapter.MarketDepthAdapter;
+import com.eis.traderUI.ui.order.OrderActivity;
 import com.eis.traderUI.util.Constant;
 import com.eis.traderUI.util.MyWebSocketClient;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -43,6 +45,7 @@ public class MarketActivity extends AppCompatActivity {
     private String productInfo;
     private MyWebSocketClient webSocketClient;
     private MarketDepth marketDepth;
+    FloatingActionButton fab;
 
     private String url="ws://202.120.40.8:30551/marketDepth/broker/";
 
@@ -61,6 +64,16 @@ public class MarketActivity extends AppCompatActivity {
         buySideMarket.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         sellSideMarket.setAdapter(sellAdapter);
         buySideMarket.setAdapter(buyAdapter);
+        fab = findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MarketActivity.this, OrderActivity.class);
+                intent.putExtra("productName", productName);
+                intent.putExtra("productInfo", productInfo);
+                startActivity(intent);
+            }
+        });
         setupWebSocket();
     }
 
