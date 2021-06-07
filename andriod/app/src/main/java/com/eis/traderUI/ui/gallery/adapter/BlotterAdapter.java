@@ -28,8 +28,7 @@ public class BlotterAdapter extends RecyclerView.Adapter<TextViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull TextViewHolder holder, int position) {
-        System.out.println("bind view");
-        if(blotterList==null||blotterList.isEmpty()){
+        if(blotterList.isEmpty()){
             System.out.println("null blotterList");
             return;
         }

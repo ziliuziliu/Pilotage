@@ -57,7 +57,7 @@ public class OrderActivity extends AppCompatActivity {
     private SpinnerAdapter orderTypeAdapter;
 
     private final String[] orderSide={"SELL","BUY"};
-    private final String[] orderType={"MARKET", "LIMIT", "STOP", "CANCEL"};
+    private final String[] orderType={"MARKET", "LIMIT", "STOP"};
     private String productInfo;
     private String productName;
     private OrderInfo orderInfo=new OrderInfo();

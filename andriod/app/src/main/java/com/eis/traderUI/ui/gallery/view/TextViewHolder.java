@@ -15,6 +15,10 @@ public class TextViewHolder extends RecyclerView.ViewHolder{
     private TextView product;
     private TextView price;
     private TextView quantity;
+    private TextView buyName;
+    private TextView buyCompany;
+    private TextView sellName;
+    private TextView sellCompany;
 
     public TextViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -22,13 +26,20 @@ public class TextViewHolder extends RecyclerView.ViewHolder{
         product=itemView.findViewById(R.id.product);
         price=itemView.findViewById(R.id.price);
         quantity=itemView.findViewById(R.id.quantity);
+        buyName=itemView.findViewById(R.id.buyName);
+        buyCompany=itemView.findViewById(R.id.buyCompany);
+        sellName=itemView.findViewById(R.id.sellName);
+        sellCompany=itemView.findViewById(R.id.sellCompany);
     }
 
     public void bind(Blotter blotter){
-        System.out.println(blotter);
-        tradeId.setText(blotter.getTradeId());
-        product.setText(blotter.getProduct());
-        price.setText(String.valueOf(blotter.getPrice()));
-        quantity.setText(String.valueOf(blotter.getQuantity()));
+        tradeId.setText("id: "+blotter.getTradeId());
+        product.setText("product: "+blotter.getProduct());
+        price.setText("price: "+String.valueOf(blotter.getPrice()));
+        quantity.setText("quantity: "+String.valueOf(blotter.getQuantity()));
+        buyName.setText(blotter.getBuyName());
+        buyCompany.setText(blotter.getBuyCompany());
+        sellCompany.setText(blotter.getSellCompany());
+        sellName.setText(blotter.getSellName());
     }
 }

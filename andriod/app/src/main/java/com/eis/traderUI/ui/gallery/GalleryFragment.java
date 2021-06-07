@@ -25,6 +25,7 @@ import com.eis.traderUI.ui.gallery.dto.Blotter;
 import com.eis.traderUI.util.Constant;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,7 +78,13 @@ public class GalleryFragment extends Fragment {
                     Log.i(TAG,"empty blotter data");
                     return;
                 }
-                blotterAdapter.updateBlotter(blotterList);
+                List<Blotter> result=new ArrayList<>();
+                for(Blotter blotter:blotterList){
+                    String tradeId=blotter.getTradeId();
+                    blotter.setTradeId(tradeId.substring(tradeId.length()-4));
+                    result.add(blotter);
+                }
+                blotterAdapter.updateBlotter(result);
             }
 
             @Override
