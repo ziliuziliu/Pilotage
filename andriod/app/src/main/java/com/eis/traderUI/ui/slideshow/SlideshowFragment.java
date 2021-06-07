@@ -36,7 +36,7 @@ public class SlideshowFragment extends Fragment {
     private static final String TAG = "blotterFragment";
 
     private RecyclerView recyclerView;
-    private OrderStatusAdapter orderStatusAdapter;
+    private OrderStatusAdapter orderStatusAdapter=new OrderStatusAdapter();
     private OrderService orderService;
     private SharedPreferences mySharedPreferences;
 
