@@ -109,7 +109,7 @@ public class OrderServiceImpl implements OrderService {
         Double total = 0.0;
         for (int i=0;i<60;i++) total += weightInfo.getWeight()[i];
         for (int i=0;i<60;i++) {
-            double ret = quantity*total;
+            double ret = (double)quantity*weightInfo.getWeight()[i]/total;
             long awakeTime = System.currentTimeMillis() + (i + 1) * 1000 * 20;
             logger.info("Order " + i + " Awake time " + awakeTime + " Amount " + (int)ret);
             q.add(new PendingOrderItem(System.currentTimeMillis() + (i + 1) * 1000 * 20, product, (int) ret, 0,
