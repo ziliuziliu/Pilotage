@@ -90,6 +90,14 @@ public class OrderServiceImpl implements OrderService {
         return orderDao.saveOrder(order);
     }
 
+    @Override
+    public OrderStatusInfo cancelOrder(String product, OrderType type, String orderId) {
+        TransmitApplication.logger.info(TAG+"make request for orderId");
+        OrderInfo orderInfo=new OrderInfo(orderId, product, type);
+        kafkaTemplate.send("ORDER",getHashCode(product), product, TransmitApplication.gson.toJson(orderInfo));
+        return orderDao.updateStatusByOrderId(new OrderStatusInfo(orderId, OrderStatus.CANCELING));
+    }
+
     @Scheduled(fixedRate = 1000 * 5)
     public void sendPendingOrder() {
         long current = System.currentTimeMillis();
