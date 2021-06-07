@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface MasterFeignClient {
 
     @RequestMapping("/master/order/available")
-    boolean available(@RequestParam String product);
+    boolean available(@RequestParam("product") String product);
 
 }
