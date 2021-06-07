@@ -18,15 +18,12 @@ public class MarketDepthAdapter extends RecyclerView.Adapter<TextViewHolder> {
     @NonNull
     private String type;
     @NonNull
-    private List<Integer> priceList;
+    private List<Integer> priceList=new ArrayList<>();
     @NonNull
-    private List<Integer> quantityList;
-    @NonNull
-    private Context mContext;
+    private List<Integer> quantityList=new ArrayList<>();
 
-    public MarketDepthAdapter(String type,Context context){
+    public MarketDepthAdapter(String type){
         this.type=type;
-        this.mContext=context;
     }
 
     @NonNull
@@ -38,9 +35,10 @@ public class MarketDepthAdapter extends RecyclerView.Adapter<TextViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull TextViewHolder holder, int position) {
-        if(type.equals(mContext.getResources().getString(R.string.market_item_sell_side))){
+        if(priceList.size()==0||quantityList.size()==0)return;
+        if(type.equals("卖")){
             holder.bind(type,5-position,priceList.get(5-position),quantityList.get(5-position));
-        }else if(type.equals(mContext.getResources().getString(R.string.market_item_buy_side))){
+        }else if(type.equals("买")){
             holder.bind(type,position,priceList.get(position),quantityList.get(position));
         }
     }

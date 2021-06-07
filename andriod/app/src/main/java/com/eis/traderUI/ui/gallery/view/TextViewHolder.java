@@ -25,6 +25,7 @@ public class TextViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void bind(Blotter blotter){
+        System.out.println(blotter);
         tradeId.setText(blotter.getTradeId());
         product.setText(blotter.getProduct());
         price.setText(String.valueOf(blotter.getPrice()));

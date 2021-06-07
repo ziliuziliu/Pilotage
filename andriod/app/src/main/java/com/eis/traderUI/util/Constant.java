@@ -7,7 +7,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Constant {
-    public static final String API_URL = "http://202.120.40.8:30551/trader/";
+    public static final String API_URL = "http://202.120.40.8:30551/";
     public static final Gson GSON = new GsonBuilder()
             .create();
     public static final Retrofit RETROFIT = new Retrofit.Builder()

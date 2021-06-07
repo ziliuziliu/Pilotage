@@ -11,7 +11,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Query;
 
 public interface BlotterService {
-    @GET("transaction")
+    @GET("trader/transaction")
     Call<Msg<List<Blotter>>> getOrderBlotter(@Header("token")String token,
                                              @Query("userId")Integer userId);
 }

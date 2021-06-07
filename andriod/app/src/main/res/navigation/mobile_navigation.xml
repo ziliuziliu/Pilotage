@@ -14,12 +14,12 @@
     <fragment
         android:id="@+id/nav_gallery"
         android:name="com.eis.traderUI.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:label="order blotter"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.eis.traderUI.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
+        android:label="order"
         tools:layout="@layout/fragment_slideshow" />
 </navigation>

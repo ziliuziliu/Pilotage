@@ -8,6 +8,6 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface UserService {
-    @POST("login")
+    @POST("trader/login")
     Call<Msg<UserInfo>> login(@Body UserInfo userInfo);
 }

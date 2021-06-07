@@ -71,8 +71,10 @@ public class GalleryFragment extends Fragment {
                     Log.e(TAG, "receive null body");
                     return;
                 }
+                Log.i(TAG,response.body().getMsg());
                 final List<Blotter> blotterList = response.body().getData();
                 if (blotterList == null || blotterList.isEmpty()) {
+                    Log.i(TAG,"empty blotter data");
                     return;
                 }
                 blotterAdapter.updateBlotter(blotterList);
