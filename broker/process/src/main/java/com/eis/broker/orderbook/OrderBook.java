@@ -109,8 +109,8 @@ public class OrderBook implements Serializable {
             }
             if (existOrder != null) {
                 orders.remove(existOrder);
-                if (volumeMap != null) modifyVolume(entry.getKey(), -remainQuantity, volumeMap);
                 remainQuantity = existOrder.getQuantity();
+                if (volumeMap != null) modifyVolume(entry.getKey(), -remainQuantity, volumeMap);
                 break;
             }
         }
