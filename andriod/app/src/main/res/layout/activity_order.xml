@@ -28,6 +28,7 @@
             android:id="@+id/productNameTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
             android:layout_weight="1"
             android:textSize="24sp" />
 
@@ -54,7 +55,8 @@
         <Spinner
             android:id="@+id/orderSideSpinner"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -78,7 +80,8 @@
         <Spinner
             android:id="@+id/orderTypeSpinner"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"/>
     </LinearLayout>
 
     <View
@@ -130,7 +133,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:ems="10" />
+            android:ems="5" />
     </LinearLayout>
 
     <LinearLayout
@@ -156,7 +159,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:ems="10" />
+            android:ems="5" />
     </LinearLayout>
 
     <LinearLayout

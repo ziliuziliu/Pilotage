@@ -13,8 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TraderUI">
-        <activity android:name=".ui.market.MarketActivity">
-        </activity>
+        <activity android:name=".ui.market.MarketActivity"
+            android:theme="@style/Theme.TraderUI.NoActionBar"/>
         <activity
             android:name=".ui.order.OrderActivity"
             android:label="@string/app_name"

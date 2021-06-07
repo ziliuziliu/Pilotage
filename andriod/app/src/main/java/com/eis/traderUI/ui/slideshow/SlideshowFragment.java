@@ -45,6 +45,8 @@ public class SlideshowFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
         recyclerView=root.findViewById(R.id.orderStatusList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        orderService= Constant.RETROFIT.create(OrderService.class);
+        orderStatusAdapter.setOrderService(orderService);
         recyclerView.setAdapter(orderStatusAdapter);
         mySharedPreferences=getContext().getSharedPreferences("userInfo", Activity.MODE_PRIVATE);
         getData();
@@ -52,7 +54,6 @@ public class SlideshowFragment extends Fragment {
     }
 
     private void getData(){
-        orderService= Constant.RETROFIT.create(OrderService.class);
         Integer userId=mySharedPreferences.getInt("userId",0);
         String token=mySharedPreferences.getString("token","token");
         Call<Msg<List<OrderInfo>>> blotterCall = orderService.getOrderList(token,userId);
