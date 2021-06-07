@@ -47,7 +47,7 @@ public class OrderController {
     @RequestMapping(value="/iceberg",method=RequestMethod.POST)
     public Msg<Boolean> iceberg(@RequestBody JsonObject jsonObject){
         if(!jsonObject.has("product")||!jsonObject.has("side")||
-                !jsonObject.has("type")||!jsonObject.has("userId")){
+                !jsonObject.has("quantity")||!jsonObject.has("userId")){
             throw new RuntimeException(MsgUtil.PARAM_DEFICIT_MSG);
         }
         String product=jsonObject.get("product").getAsString();
