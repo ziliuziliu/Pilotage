@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 public class OrderController {
+
     @Autowired
     private OrderService orderService;
 
@@ -21,10 +22,10 @@ public class OrderController {
             throw new RuntimeException(MsgUtil.PARAM_DEFICIT_MSG);
         }
         String product=jsonObject.get("product").getAsString();
-        Integer userId=jsonObject.get("userId").getAsInt();
         OrderType orderType=OrderType.valueOf(jsonObject.get("type").getAsString());
         if(orderType==OrderType.LIMIT||orderType==OrderType.STOP){
             UserSide side=UserSide.valueOf(jsonObject.get("side").getAsString());
+            Integer userId=jsonObject.get("userId").getAsInt();
             if(!jsonObject.has("price")||!jsonObject.has("quantity"))throw new RuntimeException(MsgUtil.PARAM_DEFICIT_MSG);
             Integer quantity=jsonObject.get("quantity").getAsInt();
             Integer price=jsonObject.get("price").getAsInt();
@@ -32,6 +33,7 @@ public class OrderController {
         }
         else if (orderType==OrderType.MARKET){
             UserSide side=UserSide.valueOf(jsonObject.get("side").getAsString());
+            Integer userId=jsonObject.get("userId").getAsInt();
             if(!jsonObject.has("quantity"))throw new RuntimeException(MsgUtil.PARAM_DEFICIT_MSG);
             Integer quantity=jsonObject.get("quantity").getAsInt();
             return new Msg<>(MsgCode.SUCCESS,orderService.addOrder(product,quantity,0,side,orderType,userId));
