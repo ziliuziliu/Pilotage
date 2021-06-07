@@ -20,21 +20,26 @@ public class KafkaProducer {
     private static Gson gson = new Gson();
     private static final String ORDER_TOPIC = "ORDER";
 
+    private Integer getHashCode(String product){
+        return Integer.parseInt(product.substring(product.length()-2));
+    }
+
     public void sendMsg(TransactionMsg msg) {
         String json = gson.toJson(msg, msg.getClass());
         logger.info(json);
-//        kafkaTemplate.send("TRANSACTION", json);
+        kafkaTemplate.send("TRANSACTION", json);
     }
 
     public void sendMsg(OrderStatusMsg msg) {
         String json = gson.toJson(msg, msg.getClass());
         logger.info(json);
-//        kafkaTemplate.send("STATUS", json);
+        kafkaTemplate.send("STATUS", json);
     }
 
     public void sendMsg(OrderMsg msg) {
         String json = gson.toJson(msg, msg.getClass());
         logger.info(json);
-//        kafkaTemplate.send("ORDER", json);
+        String product = msg.getProduct();
+        kafkaTemplate.send("ORDER", getHashCode(product), product, json);
     }
 }

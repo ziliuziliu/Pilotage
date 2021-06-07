@@ -3,20 +3,21 @@
         <my-header></my-header>
         <div class="menu">
         <my-menu></my-menu>
-            <div class="form">
-                <h2>Check Orders Status</h2>
-                <input type="text" placeholder="Your Id"/>
-                <label>User ID</label>
-                        <div class="button">
-                            <div class="set_7_btn-wrapper">
-                                <svg height="45" width="150">
-                                    <rect id="set_7_button4" height="45" width="150"></rect>
-                                </svg>
-                                <div id="set_7_text"><a href="">Check</a></div>
-                            </div>
-                        </div>
+            <div id="table-orders">
+                <h2>Transaction Records</h2>
+                <table id="secondTable">
+                    <thead>
+                    <tr>
+                        <th v-bind:key="col" v-for="col in columns">{{col}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-bind:key="row" v-for="row in transactions">
+                        <td v-bind:key="col" v-for="col in columns">{{row[col]}}</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-<!--            还没实现-->
         </div>
         <my-footer></my-footer>
     </div>
@@ -26,6 +27,7 @@
     import Header from '../common/Header'
     import Menu from '../common/Menu'
     import Footer from '../common/Footer'
+    import {requestTransactions} from "../api/request";
 
     export default {
         name: 'CheckOrder',
@@ -34,6 +36,29 @@
             'my-menu':Menu,
             'my-footer':Footer
         },
+        data(){
+            return {
+                transactions : [],
+                columns:["traderId","orderId", "broker", "product",  "price", "quantity","sellName", "sellCompany", "buyName", "buyCompany", "initSide"]
+            }
+        },
+        mounted() {
+            let userId = localStorage.getItem('userId');
+            this.getTransactions(userId);
+        },
+        methods:{
+            getTransactions(userid){
+                let formData = new FormData();
+
+                formData.append('userId', userid);
+                requestTransactions(formData).then((res) => {
+                    console.log(res);
+                    if (res.status === 200 && res.msg === "success") {
+                        this.transactions = res.data;
+                    }
+                });
+            }
+        }
     }
 </script>
 
@@ -47,11 +72,13 @@
         /*margin: 4em 2em;*/
         /*float: left;*/
     }
-    .form{
-        margin: auto;
-        margin-left: 150px;
+    #table-orders{
+        font-size: 10px;
+    }
+    h2{
         color: #66fcf1;
     }
+
     label {
         position: relative;
         top: -20.6666666667px;
@@ -99,47 +126,41 @@
         background: rgba(33, 150, 243, 0.3);
     }
 
-    /*       Just setting CSS for the page   */
-
-    @import url(http://fonts.googleapis.com/css?family=Roboto:400,100,900);
-    .button {
-        width: 100%;
-        float: left;
-    }
-
-    .set_7_btn-wrapper {
-        /* float:left; */
-        width: auto;
-        line-height: 45px;
-        display: inline-block;
-        margin-right: 2em;
-        text-align: center;
-    }
-
-    #set_7_text {
-        margin-top: -60px;
-        text-align: center;
-    }
-
     #set_7_text a {
         color: #66fcf1;
         text-decoration: none;
         font-weight: 400;
     }
 
-    #set_7_button4 {
-        stroke-width: 6px;
-        fill: transparent;
-        stroke: #66fcf1;
-        stroke-dasharray: 85 400;
-        stroke-dashoffset: -228;
-        transition: 1s all ease;
-    }
-    .set_7_btn-wrapper:hover #set_7_button4 {
-        stroke-dasharray: 50 0;
-        stroke-width: 3px;
-        stroke-dashoffset: 0;
-        stroke: #66fcf1;
-    }
+    table {
 
+        font-family: 'Open Sans', sans-serif;
+        width: 750px;
+        border-collapse: collapse;
+        border: 3px solid black;
+
+        color: #66FCF1;
+    }
+    table th {
+        text-transform: uppercase;
+        text-align: left;
+        background: black;
+        color: #66fcf1;
+        padding: 8px;
+        min-width: 30px;
+    }
+    table td {
+        text-align: left;
+        padding: 8px;
+        border-right: 2px solid black;
+    }
+    table td:last-child {
+        border-right: none;
+    }
+    table tbody tr:nth-child(2n) td {
+        background: #105469;
+    }
+    table tbody tr:nth-child(2n-1) td {
+        background: #012B39
+    }
 </style>

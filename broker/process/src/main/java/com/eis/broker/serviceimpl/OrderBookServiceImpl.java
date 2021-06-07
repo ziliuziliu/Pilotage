@@ -7,6 +7,7 @@ import com.eis.broker.entity.TransactionData;
 import com.eis.broker.message.*;
 import com.eis.broker.orderbook.Order;
 import com.eis.broker.orderbook.OrderBook;
+import com.eis.broker.service.MasterFeignClient;
 import com.eis.broker.service.OrderBookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +39,9 @@ public class OrderBookServiceImpl implements OrderBookService {
 
     @Autowired
     private DispatchGrpcClient dispatchGrpcClient;
+
+    @Autowired
+    private MasterFeignClient masterFeignClient;
 
     @Override
     public OrderBook initOrderBook(String product) {
@@ -119,7 +123,8 @@ public class OrderBookServiceImpl implements OrderBookService {
         redisTemplate.opsForValue().set("orderbook-" + product, orderBook);
 
         logger.info("----notifying master----");
-        boolean response = dispatchGrpcClient.finished(product);
+//        boolean response = dispatchGrpcClient.finished(product);
+        boolean response = masterFeignClient.available(product);
         logger.info(String.valueOf(response));
     }
 }

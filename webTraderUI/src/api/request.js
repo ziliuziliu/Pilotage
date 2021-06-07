@@ -41,3 +41,10 @@ export const requestLogin=(company, username, password) => {
         }
     })
 };
+export const requestTransactions=(formData) => {
+    axios.get(`${traderUrl}/order`, formData, {
+        headers:{
+            token: this.GLOBAL.token
+        }
+    })
+};

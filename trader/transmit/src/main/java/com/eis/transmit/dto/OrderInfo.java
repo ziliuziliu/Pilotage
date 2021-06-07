@@ -18,7 +18,11 @@ public class OrderInfo {
     private String trader;
 
     public OrderInfo(){}
-
+    public OrderInfo(String orderId, String product, OrderType type) {
+        this.orderId = orderId;
+        this.product = product;
+        this.type = type;
+    }
     public OrderInfo(String orderId, String product, Integer quantity, Integer price,
                  UserSide side, OrderType type, String company,String trader) {
         this.orderId = orderId;

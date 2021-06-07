@@ -3,7 +3,6 @@
         <my-header></my-header>
         <div class="menu">
             <my-menu></my-menu>
-
             <el-form :model="marketForm" class="form1">
                 <h2>Market Depth</h2>
                     <input type="text" placeholder="Product" v-model="marketForm.product"/>

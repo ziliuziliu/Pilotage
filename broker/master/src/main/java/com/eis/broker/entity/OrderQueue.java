@@ -1,6 +1,7 @@
 package com.eis.broker.entity;
 
 import com.eis.broker.endpoint.DispatchGrpcClient;
+import com.eis.broker.service.ProcessFeignService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,13 @@ public class OrderQueue {
     private static final Logger logger = LoggerFactory.getLogger(OrderQueue.class);
 
     private final DispatchGrpcClient dispatchGrpcClient;
+    private final ProcessFeignService processFeignService;
 
     @Autowired
-    public OrderQueue(DispatchGrpcClient dispatchGrpcClient) {
+    public OrderQueue(DispatchGrpcClient dispatchGrpcClient,
+                      ProcessFeignService processFeignService) {
         this.dispatchGrpcClient = dispatchGrpcClient;
+        this.processFeignService = processFeignService;
     }
 
     class DispatchThread extends Thread {
@@ -81,7 +85,8 @@ public class OrderQueue {
             status.put(product, false);
             OrderLog orderLog = queue.pop();
             logger.info("----Dispatching order " + orderLog.getOrderId() + "----");
-            boolean response = dispatchGrpcClient.dispatch(orderLog);
+//            boolean response = dispatchGrpcClient.dispatch(orderLog);
+            boolean response = processFeignService.process(orderLog);
             logger.info(String.valueOf(response));
             lock.unlock();
         }

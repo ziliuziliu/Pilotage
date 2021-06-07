@@ -11,6 +11,8 @@ public interface OrderService {
     OrderStatusInfo addOrder(String product, Integer quantity, Integer price,
                              UserSide side, OrderType type,Integer userId);
 
+    OrderStatusInfo cancelOrder(String product, OrderType type, String orderId);
+
     List<Order> findAllByUserId(Integer userId);
 
     boolean batch(String product, Integer quantity, UserSide side, Integer userId);

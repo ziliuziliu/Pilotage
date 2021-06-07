@@ -19,4 +19,7 @@ public interface OrderFeignService {
 
     @RequestMapping(value="/order",method=RequestMethod.GET)
     Msg<List<OrderInfo>> findByUserId(@RequestParam("userId")Integer userId);
+
+    @RequestMapping(value="/iceberg", method = RequestMethod.POST)
+    Msg<Boolean> iceberg(@RequestBody JsonObject jsonObject);
 }

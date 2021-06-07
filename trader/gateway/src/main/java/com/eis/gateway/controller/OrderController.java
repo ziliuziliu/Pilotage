@@ -25,4 +25,9 @@ public class OrderController {
     Msg<List<OrderInfo>> findByUserId(@RequestParam("userId")Integer userId){
         return orderFeignService.findByUserId(userId);
     }
+
+    @RequestMapping(value="/iceberg",method = RequestMethod.POST)
+    Msg<Boolean> iceberg(@RequestBody JsonObject jsonObject) {
+        return orderFeignService.iceberg(jsonObject);
+    }
 }

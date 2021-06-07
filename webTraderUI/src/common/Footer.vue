@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <div id="join">
+            <div id="join" >
                 <p id="join-soc">Pilotage 2021</p>
             </div>
         </div>
@@ -38,8 +38,9 @@ img{
     justify-content: center;
 }
 #join{
-    /* padding-bottom: 50px; */
-    height: 250px;
+    /*height: 250px;*/
+    margin-top: 200px;
+    float: bottom;
 }
 #join-soc{
     display: flex;

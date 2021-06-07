@@ -3,7 +3,7 @@
     <table>
       <tbody >
         <tr>
-          <td><router-link to="/makeOrder" id="router-li">New Order</router-link></td>
+          <td><router-link to="/makeOrder" id="router-li">Make Order</router-link></td>
         </tr>
         <tr>
           <td><router-link to="/myOrders" id="router-li">My Orders</router-link></td>
@@ -12,7 +12,7 @@
           <td><router-link to="/marketDepth" id="router-li">Market Depth</router-link></td>
         </tr>
         <tr>
-          <td><router-link to="/checkOrder" id="router-li">Check Order</router-link></td>
+          <td><router-link to="/checkOrder" id="router-li">Transaction Records</router-link></td>
         </tr>
       </tbody>
     </table>
@@ -24,7 +24,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
 
 *, *:before, *:after {
@@ -64,6 +64,7 @@ td {
 }
 tbody tr {
   transition: background 0.25s ease;
+
 }
 tbody tr:hover {
   background: #014055;
