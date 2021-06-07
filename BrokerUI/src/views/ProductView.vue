@@ -6,7 +6,7 @@
             <span style="margin-left: 32px; margin-right: 32px; margin-top: 32px">
                 <a-table :columns="columns" :data-source="products">
                     <template slot="productName" slot-scope="text">
-                        <a-button type="primary" @click="toMarket(text)">查看行情</a-button>
+                        <a-button type="primary" @click="toMarket(text)">View Market Depth</a-button>
                     </template>
                 </a-table>
             </span>

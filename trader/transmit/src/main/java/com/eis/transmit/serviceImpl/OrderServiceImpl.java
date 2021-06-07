@@ -90,7 +90,7 @@ public class OrderServiceImpl implements OrderService {
         return orderDao.saveOrder(order);
     }
 
-    @Scheduled(fixedRate = 1000 * 20)
+    @Scheduled(fixedRate = 1000 * 5)
     public void sendPendingOrder() {
         long current = System.currentTimeMillis();
         while (q.peek() != null && q.peek().getTimestamp() <= current) {
@@ -110,9 +110,9 @@ public class OrderServiceImpl implements OrderService {
         for (int i=0;i<60;i++) total += weightInfo.getWeight()[i];
         for (int i=0;i<60;i++) {
             double ret = (double)quantity*weightInfo.getWeight()[i]/total;
-            long awakeTime = System.currentTimeMillis() + (i + 1) * 1000 * 20;
+            long awakeTime = System.currentTimeMillis() + (i + 1) * 1000 * 5;
             logger.info("Order " + i + " Awake time " + awakeTime + " Amount " + (int)ret);
-            q.add(new PendingOrderItem(System.currentTimeMillis() + (i + 1) * 1000 * 20, product, (int) ret, 0,
+            q.add(new PendingOrderItem(awakeTime, product, (int) ret, 0,
                     side, OrderType.MARKET, userId));
         }
         return true;
