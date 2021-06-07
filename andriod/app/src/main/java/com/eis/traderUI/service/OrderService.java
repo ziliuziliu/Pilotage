@@ -2,6 +2,7 @@ package com.eis.traderUI.service;
 
 import com.eis.traderUI.dto.Msg;
 import com.eis.traderUI.dto.OrderInfo;
+import com.google.gson.JsonObject;
 
 import java.util.List;
 
@@ -18,8 +19,8 @@ public interface OrderService {
                                             @Query("userId")Integer userId);
 
     @POST("trader/order")
-    Call<Msg<List<OrderInfo>>> submitOrder(@Header("token")String token,
-                                           @Body OrderInfo orderInfo);
+    Call<Msg<JsonObject>> submitOrder(@Header("token")String token,
+                                      @Body OrderInfo orderInfo);
 
     @POST("trader/iceberg")
     Call<Msg<Boolean>> submitIceberg(@Header("token")String token,

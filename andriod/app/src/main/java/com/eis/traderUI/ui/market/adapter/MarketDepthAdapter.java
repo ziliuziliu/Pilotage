@@ -33,10 +33,9 @@ public class MarketDepthAdapter extends RecyclerView.Adapter<TextViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull TextViewHolder holder, int position) {
-        System.out.println("update view holder");
         if(priceList.size()==0||quantityList.size()==0)return;
         if(type.equals("SELL")){
-            holder.bind(type,5-position,priceList.get(5-position),quantityList.get(5-position));
+            holder.bind(type,4-position,priceList.get(4-position),quantityList.get(4-position));
         }else if(type.equals("BUY")){
             holder.bind(type,position,priceList.get(position),quantityList.get(position));
         }

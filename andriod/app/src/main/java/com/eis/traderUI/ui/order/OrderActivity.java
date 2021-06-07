@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.eis.traderUI.MainActivity;
 import com.eis.traderUI.R;
 import com.eis.traderUI.dto.Msg;
 import com.eis.traderUI.dto.OrderInfo;
@@ -29,6 +30,7 @@ import com.eis.traderUI.ui.common.adapter.SpinnerAdapter;
 import com.eis.traderUI.ui.gallery.dto.Blotter;
 import com.eis.traderUI.util.Constant;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,8 +56,8 @@ public class OrderActivity extends AppCompatActivity {
     private SpinnerAdapter orderSideAdapter;
     private SpinnerAdapter orderTypeAdapter;
 
-    private final String[] orderSide={"sell","buy"};
-    private final String[] orderType={"market order","limit order","stop order","cancel order"};
+    private final String[] orderSide={"SELL","BUY"};
+    private final String[] orderType={"MARKET", "LIMIT", "STOP", "CANCEL"};
     private String productInfo;
     private String productName;
     private OrderInfo orderInfo=new OrderInfo();
@@ -177,7 +179,7 @@ public class OrderActivity extends AppCompatActivity {
                         Log.e(TAG, "receive null body");
                         return;
                     }
-                    finish();
+                    startActivity(new Intent(OrderActivity.this, MainActivity.class));
                 }
 
                 @Override
@@ -189,10 +191,10 @@ public class OrderActivity extends AppCompatActivity {
             });
         }
         else {
-            Call<Msg<List<OrderInfo>>> orderCall = orderService.submitOrder(token, orderInfo);
-            orderCall.enqueue(new Callback<Msg<List<OrderInfo>>>() {
+            Call<Msg<JsonObject>> orderCall = orderService.submitOrder(token, orderInfo);
+            orderCall.enqueue(new Callback<Msg<JsonObject>>() {
                 @Override
-                public void onResponse(Call<Msg<List<OrderInfo>>> call, Response<Msg<List<OrderInfo>>> response) {
+                public void onResponse(Call<Msg<JsonObject>> call, Response<Msg<JsonObject>> response) {
                     if (!response.isSuccessful()) {
                         Log.e(TAG, "response not success");
                         return;
@@ -201,11 +203,12 @@ public class OrderActivity extends AppCompatActivity {
                         Log.e(TAG, "receive null body");
                         return;
                     }
-                    finish();
+                    System.out.println(response.body().getMsg());
+                    startActivity(new Intent(OrderActivity.this, MainActivity.class));
                 }
 
                 @Override
-                public void onFailure(Call<Msg<List<OrderInfo>>> call, Throwable t) {
+                public void onFailure(Call<Msg<JsonObject>> call, Throwable t) {
                     Log.e(TAG, "fetch order blotter failed");
                     Snackbar.make(submitButton, "接收失败", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
