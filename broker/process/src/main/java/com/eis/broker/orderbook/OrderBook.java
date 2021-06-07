@@ -54,7 +54,6 @@ public class OrderBook implements Serializable {
     private void addOrder(Order order, Map<Integer, LinkedList<Order>> map, Map<Integer, LinkedList<Order>> conjMap) {
         Integer price = order.getPrice();
         LinkedList<Order> orderList;
-        if (!conjMap.containsKey(price)) conjMap.put(price, new LinkedList<>());
         if (!map.containsKey(price)) orderList = new LinkedList<>();
         else orderList = map.get(price);
         orderList.offer(order);

@@ -26,13 +26,13 @@ def build_order(product, current_price):
 
 def run(product):
     while True:
-        time.sleep(1)
-        res = requests.get('http://localhost:8082/process/product/getMarketDepth', params={'product': product})
+        time.sleep(0.5)
+        res = requests.get('http://202.120.40.8:30551/process/product/getMarketDepth', params={'product': product})
         res_body = res.json()
         data = build_order(product, res_body['currentPrice'])
         header = {'content-type': 'application/json'}
         print('sending order ', time.time(), data)
-        requests.post('http://localhost:8080/master/order/receive', data=json.dumps(data), headers=header)
+        requests.post('http://202.120.40.8:30556/master/order/receive', data=json.dumps(data), headers=header)
 
 
-run('i2110')
+run('i2111')
