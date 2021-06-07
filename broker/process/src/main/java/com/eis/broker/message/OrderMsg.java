@@ -26,6 +26,7 @@ public class OrderMsg extends Msg {
         this.type = type;
         this.company = company;
         this.trader = trader;
+        this.price = 0;
     }
 
 }
